@@ -105,7 +105,6 @@ export default function Page() {
               >
                 {<LevelTwo />}
               </PresentationControls>
-
               <Lights />
               <PerspectiveCamera makeDefault position={[0, 0, 25]} />
             </View>
@@ -120,7 +119,9 @@ export default function Page() {
               >
                 <p className='font-bold text-xl'>Proximal Policy Optimization</p>
                 <div>
-                  <Button size='sm'>Learn Now</Button>
+                  <Link href={'/ppo'} className={buttonVariants({ size: 'sm' })}>
+                    Learn Now
+                  </Link>
                 </div>
               </animated.div>
             )}
