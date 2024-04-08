@@ -42,7 +42,7 @@ export default function Page() {
 
   return (
     <div className='w-screen h-screen'>
-      <div className='flex flex-col  gap-24 px-24 max-w-[800px] mx-auto items-center justify-center w-full'>
+      <div className='flex flex-col  gap-24 md:px-24 px-4 max-w-[800px] mx-auto items-center justify-center w-full'>
         <Navbar />
         <div className='pt-48 flex flex-col gap-2'>
           <p className='text-xl'>
