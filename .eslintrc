@@ -7,6 +7,8 @@
     "no-html-link-for-pages": "off",
     "tailwindcss/classnames-order": "off",
     "tailwindcss/enforces-shorthand": "off",
-    "react-hooks/exhaustive-deps": "off"
-  }
+    "react-hooks/exhaustive-deps": "off",
+    "react/jsx-no-comment-textnodes": "off",
+    "react/no-unescaped-entities": "off",
+  },
 }
