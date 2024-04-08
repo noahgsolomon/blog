@@ -42,42 +42,48 @@ export default function ThemeButton({ className = '' }: { className?: string }) 
         )}
       </DropdownMenuTrigger>
       <DropdownMenuContent className='flex flex-col gap-1'>
-        <Button
-          variant={'outline'}
-          size='sm'
-          className='cursor-pointer gap-2'
-          onClick={() => {
-            setTheme('light')
-            setThemee('light')
-          }}
-        >
-          <SunIcon className='size-4' />
-          Light
-        </Button>
-        <Button
-          variant={'outline'}
-          size='sm'
-          className='cursor-pointer gap-2'
-          onClick={() => {
-            setTheme('dark')
-            setThemee('dark')
-          }}
-        >
-          <MoonIcon className='size-4' />
-          Dark
-        </Button>
-        <Button
-          variant={'outline'}
-          size='sm'
-          className='cursor-pointer gap-2'
-          onClick={() => {
-            setTheme('system')
-            setThemee('system')
-          }}
-        >
-          <Laptop2 className='size-4' />
-          System
-        </Button>
+        <DropdownMenuItem asChild>
+          <Button
+            variant={'outline'}
+            size='sm'
+            className='cursor-pointer gap-2'
+            onClick={() => {
+              setTheme('light')
+              setThemee('light')
+            }}
+          >
+            <SunIcon className='size-4' />
+            Light
+          </Button>
+        </DropdownMenuItem>
+        <DropdownMenuItem asChild>
+          <Button
+            variant={'outline'}
+            size='sm'
+            className='cursor-pointer gap-2'
+            onClick={() => {
+              setTheme('dark')
+              setThemee('dark')
+            }}
+          >
+            <MoonIcon className='size-4' />
+            Dark
+          </Button>
+        </DropdownMenuItem>
+        <DropdownMenuItem asChild>
+          <Button
+            variant={'outline'}
+            size='sm'
+            className='cursor-pointer gap-2'
+            onClick={() => {
+              setTheme('system')
+              setThemee('system')
+            }}
+          >
+            <Laptop2 className='size-4' />
+            System
+          </Button>
+        </DropdownMenuItem>
       </DropdownMenuContent>
     </DropdownMenu>
   )

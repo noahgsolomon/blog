@@ -5,7 +5,7 @@ import { Button, buttonVariants } from '@/components/ui/button'
 import { config } from '@react-spring/three'
 import { animated, useSpring, config as webConfig } from '@react-spring/web'
 import { PerspectiveCamera, PresentationControls } from '@react-three/drei'
-import { ArrowLeft, ArrowRight, Github, Info, Rabbit, Zap } from 'lucide-react'
+import { Rabbit } from 'lucide-react'
 import dynamic from 'next/dynamic'
 import Lights from './Lights'
 import useGameState from './store/useGameState'
@@ -90,8 +90,8 @@ export default function Page() {
         </div>
         <div className='w-full flex flex-col gap-4'>
           <p className='text-3xl'>Featured Lessons</p>
-          <div className='relative h-80 w-full rounded-lg border'>
-            <View className='rounded-lg touch-none w-full h-full'>
+          <div className='relative h-80 w-full rounded-lg border overflow-hidden'>
+            <View className='touch-none w-full h-full '>
               <PresentationControls
                 enabled
                 global

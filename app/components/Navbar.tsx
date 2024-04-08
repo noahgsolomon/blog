@@ -32,30 +32,36 @@ const NavBar = () => {
                 </Button>
               </DropdownMenuTrigger>
               <DropdownMenuContent className='flex flex-col gap-1'>
-                <Link
-                  target='_blank'
-                  href={'https://github.com/noahgsolomon'}
-                  className={buttonVariants({ variant: 'outline', size: 'sm', className: 'flex flex-row gap-2' })}
-                >
-                  <Github className='size-4 fill-[#333]' />
-                  Github
-                </Link>
-                <Link
-                  target='_blank'
-                  href={'https://twitter.com/noahgsolomon'}
-                  className={buttonVariants({ variant: 'outline', size: 'sm', className: 'flex flex-row gap-2' })}
-                >
-                  <XIcon className='size-4 fill-primary' />
-                  Twitter
-                </Link>
-                <Link
-                  target='_blank'
-                  href={'https://www.linkedin.com/in/noahgsolomon'}
-                  className={buttonVariants({ variant: 'outline', size: 'sm', className: 'flex flex-row gap-2' })}
-                >
-                  <Linkedin className='size-4' />
-                  LinkedIn
-                </Link>
+                <DropdownMenuItem asChild>
+                  <Link
+                    target='_blank'
+                    href={'https://github.com/noahgsolomon'}
+                    className={buttonVariants({ variant: 'outline', size: 'sm', className: 'flex flex-row gap-2' })}
+                  >
+                    <Github className='size-4 fill-[#333]' />
+                    Github
+                  </Link>
+                </DropdownMenuItem>
+                <DropdownMenuItem asChild>
+                  <Link
+                    target='_blank'
+                    href={'https://twitter.com/noahgsolomon'}
+                    className={buttonVariants({ variant: 'outline', size: 'sm', className: 'flex flex-row gap-2' })}
+                  >
+                    <XIcon className='size-4 fill-primary' />
+                    Twitter
+                  </Link>
+                </DropdownMenuItem>
+                <DropdownMenuItem asChild>
+                  <Link
+                    target='_blank'
+                    href={'https://www.linkedin.com/in/noahgsolomon'}
+                    className={buttonVariants({ variant: 'outline', size: 'sm', className: 'flex flex-row gap-2' })}
+                  >
+                    <Linkedin className='size-4' />
+                    LinkedIn
+                  </Link>
+                </DropdownMenuItem>
               </DropdownMenuContent>
             </DropdownMenu>
           </div>
