@@ -441,7 +441,7 @@ export default function LevelTwo() {
     if (gameState.state === 'RUNNING') {
       intervalId = setInterval(() => {
         moveAgents()
-      }, 500)
+      }, 250)
     }
 
     return () => {
