@@ -1,0 +1,13 @@
+/*/node_modules
+/journey/*/node_modules
+/*/.next
+/*/.vscode
+node_modules/*
+.next/*
+.DS_Store
+.env
+train/venv/*
+train/videos/*
+train/models/*
+train/runs/*
+train/wandb/*
