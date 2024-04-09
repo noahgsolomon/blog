@@ -2,7 +2,7 @@
 
 import { OrbitControls, PerspectiveCamera, PresentationControls } from '@react-three/drei'
 import dynamic from 'next/dynamic'
-import { useEffect, useMemo, useState } from 'react'
+import { Fragment, useEffect, useMemo, useState } from 'react'
 import Lights from '@/Lights'
 import PPO from './PPO'
 import * as THREE from 'three'
@@ -140,8 +140,8 @@ export default function Page() {
       <div className='shadow-md absolute bottom-1/4 right-4 md:bottom-24 md:right-24 rounded-lg border p-4 bg-card z-10 max-w-[60%] w-[400px] flex max-h-[50%] flex-col gap-4 overflow-y-auto'>
         <Carousel change={currentPosition}>
           <CarouselContent>
-            {CHECKPOINTS[currentPosition % CHECKPOINTS.length].markdown.map((markdown) => (
-              <CarouselItem>
+            {CHECKPOINTS[currentPosition % CHECKPOINTS.length].markdown.map((markdown, index) => (
+              <CarouselItem key={index}>
                 <Markdown
                   components={{
                     code: ({ className, children, ...props }) => {
@@ -173,7 +173,12 @@ export default function Page() {
             <p className='font-bold text-lg'>
               {[
                 ...Array.from({ length: CHECKPOINTS[currentPosition % CHECKPOINTS.length].markdown.length }).map(
-                  (_, index) => (index === markdownIdx ? <span className='text-blue-500'>.</span> : '.'),
+                  (_, index) =>
+                    index === markdownIdx ? (
+                      <span className='text-blue-500'>.</span>
+                    ) : (
+                      <Fragment key={index}>.</Fragment>
+                    ),
                 ),
               ]}
             </p>
