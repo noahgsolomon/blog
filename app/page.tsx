@@ -90,8 +90,8 @@ export default function Page() {
         </div>
         <div className='w-full flex flex-col gap-4'>
           <p className='text-3xl'>Featured Lessons</p>
-          <div className='shadow-md relative h-80 w-full rounded-lg border overflow-hidden'>
-            <View className='hidden sm:block touch-none w-full h-full '>
+          <div className='relative h-80 w-full rounded-lg border overflow-hidden'>
+            <View className='touch-none w-full h-full '>
               <PresentationControls
                 enabled
                 global
@@ -108,13 +108,6 @@ export default function Page() {
               <Lights />
               <PerspectiveCamera makeDefault position={[0, 0, 25]} />
             </View>
-            <Image
-              className='absolute top-1/2 pt-8 left-1/2 transform -translate-x-1/2 -translate-y-1/2 ssm:hidden'
-              alt='bunny'
-              width={100}
-              height={100}
-              src={'/bunny.png'}
-            />
             {gameState.state === 'LOADING' ? (
               <p className='absolute top-0 bottom-0 left-0 right-0 flex items-center justify-center gap-2 z-10'>
                 Loading <Rabbit className='size-4' />
