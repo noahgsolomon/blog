@@ -175,7 +175,9 @@ export default function Page() {
                 ...Array.from({ length: CHECKPOINTS[currentPosition % CHECKPOINTS.length].markdown.length }).map(
                   (_, index) =>
                     index === markdownIdx ? (
-                      <span className='text-blue-500'>.</span>
+                      <span key={index} className='text-blue-500'>
+                        .
+                      </span>
                     ) : (
                       <Fragment key={index}>.</Fragment>
                     ),
