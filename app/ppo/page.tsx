@@ -71,7 +71,7 @@ export default function Page() {
         <OrbitControls />
         <Controls zoom={zoom} focus={focus} />
       </View>
-      <div className='absolute top-1/2 right-4 rounded-lg border p-4 bg-card z-10 max-w-[300px] flex flex-col gap-4'>
+      <div className='shadow-md absolute bottom-4 right-4 md:top-1/4 md:right-1/4 rounded-lg border p-4 bg-card z-10 max-w-[300px] flex flex-col gap-4'>
         <h2>explanation</h2>
         <p>here is an explanation modal yep</p>
         <Button
@@ -84,7 +84,7 @@ export default function Page() {
         </Button>
       </div>
       <Accordion
-        className='bg-card rounded-lg transition-all cursor-pointer z-20 absolute bottom-4 left-4'
+        className='shadow-md bg-card rounded-lg transition-all cursor-pointer z-20 absolute bottom-4 left-4'
         type='single'
         collapsible
       >
