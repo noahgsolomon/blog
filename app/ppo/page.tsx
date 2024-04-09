@@ -139,7 +139,7 @@ export default function Page() {
       </View>
       <div className='shadow-md absolute bottom-1/4 right-4 md:bottom-24 md:right-24 rounded-lg border p-4 bg-card z-10 max-w-[60%] w-[400px] flex max-h-[50%] flex-col gap-4 overflow-y-auto'>
         <Carousel change={currentPosition}>
-          <CarouselContent>
+          <CarouselContent className='pointer-events-none'>
             {CHECKPOINTS[currentPosition % CHECKPOINTS.length].markdown.map((markdown, index) => (
               <CarouselItem key={index}>
                 <Markdown
@@ -170,12 +170,16 @@ export default function Page() {
           </CarouselContent>
           <div className='flex w-full justify-center gap-4 pt-4 items-center'>
             <CarouselPrevious setMarkdownIdx={setMarkdownIdx} />
-            <p className='font-bold text-lg'>
+            <p className='font-bold text-xl'>
               {[
                 ...Array.from({ length: CHECKPOINTS[currentPosition % CHECKPOINTS.length].markdown.length }).map(
                   (_, index) =>
                     index === markdownIdx ? (
                       <span key={index} className='text-blue-500'>
+                        .
+                      </span>
+                    ) : index < markdownIdx ? (
+                      <span key={index} className=' text-green-500'>
                         .
                       </span>
                     ) : (
