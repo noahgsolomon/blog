@@ -39,7 +39,7 @@
     --background: 224 71.4% 4.1%;
     --foreground: 210 20% 98%;
 
-    --card: 224 71.4% 4.1%;
+    --card: 224 71.4% 8.1%;
     --card-foreground: 210 20% 98%;
 
     --popover: 224 71.4% 4.1%;
@@ -92,4 +92,95 @@
 image {
   width: auto;
   height: auto;
+}
+
+/* General styling for the code block */
+.hljs {
+  @apply overflow-x-auto font-mono !important
+}
+
+pre {
+  @apply max-w-full overflow-x-auto bg-card p-2 rounded-lg border border-border !important;
+}
+
+code {
+  @apply whitespace-pre-wrap text-primary !important;
+  /* This will wrap the text inside the code block */
+}
+
+.code-language {
+  @apply font-bold text-[#555] bg-[#eee] px-2 py-1 rounded-lg text-sm mb-2 inline-block !important;
+}
+
+/* Keyword styling (like def, if, else, return) */
+.hljs-keyword {
+  @apply text-[#a626a4] font-bold !important;
+  /* Purple */
+}
+
+/* Function names */
+.hljs-title.function_ {
+  @apply text-[#e45649] !important;
+  /* Reddish */
+}
+
+/* Parameters and variables */
+.hljs-params {
+  @apply text-[#50a14f] !important;
+  /* Green */
+}
+
+/* Number styling */
+.hljs-number {
+  @apply text-[#986801] !important;
+  /* Brown */
+}
+
+/* Comments */
+.hljs-comment {
+  @apply text-[#a0a1a7] italic !important;
+  /* Light gray */
+}
+
+/* Built-in functions and strings */
+.hljs-built_in,
+.hljs-string {
+  @apply text-[#0184bb] !important;
+  /* Blue */
+}
+
+/* Substitutions in strings */
+.hljs-subst {
+  @apply text-[#c18401] !important;
+  /* Orange */
+}
+
+.hljs-variable {
+  @apply text-[#4078f2] !important;
+  /* Blue */
+}
+
+.hljs-built_in {
+  @apply text-[#4cf240] !important;
+  /* Blue */
+}
+
+.katex-html {
+  @apply hidden
+}
+
+h1, h2, h3 {
+  @apply text-base md:text-lg
+}
+
+p {
+  @apply text-xs md:text-sm text-primary/80
+}
+
+math {
+  @apply bg-secondary border rounded-lg p-1 max-w-full overflow-x-auto
+}
+
+mo, mfrac, mtext, mrow, msup, mi, annotation {
+  @apply text-[10px]
 }
