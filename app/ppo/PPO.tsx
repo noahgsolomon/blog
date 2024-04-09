@@ -3,19 +3,19 @@
 import { Grid } from '@react-three/drei'
 import { useTheme } from 'next-themes'
 
-export default function PPO({ zoomToView }) {
+export default function PPO() {
   const theme = useTheme().resolvedTheme
   return (
     <>
-      <mesh position={[0, 0, 0]} onClick={(e: any) => zoomToView(e.object.position)}>
+      <mesh position={[0, 0, 0]}>
         <meshStandardMaterial />
         <boxGeometry />
       </mesh>
-      <mesh position={[2, 0, 0]} onClick={(e: any) => zoomToView(e.object.position)}>
+      <mesh position={[2, 0, 0]}>
         <meshStandardMaterial />
         <boxGeometry />
       </mesh>
-      <mesh position={[-2, 0, 0]} onClick={(e: any) => zoomToView(e.object.position)}>
+      <mesh position={[-2, 0, 0]}>
         <meshStandardMaterial />
         <boxGeometry />
       </mesh>
