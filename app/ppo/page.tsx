@@ -53,6 +53,8 @@ function Controls({ zoom, focus, pos = new THREE.Vector3(), look = new THREE.Vec
   })
 }
 
+const CHAPTERS = [{ chapter: 1, title: '', checkpointIdx: 0 }]
+
 const CHECKPOINTS = [
   {
     position: [-2, 0, 0],
@@ -80,15 +82,13 @@ $$L^{CLIP}(\\theta) = \\hat{\\mathbb{E}}_t\\left[ \\min\\left( \\frac{\\pi_\\the
       `
 ## PPO Algorithm
 
-1. Initialize policy parameters $\\theta_0$ and value function parameters $\\phi_0$
-2. For $k = 0, 1, 2, \\dots$ do
-   1. Collect set of trajectories $\\mathcal{D}_k = \\{\\tau_i\\}$ by running policy $\\pi_{\\theta_k}$ in the environment 
-   2. Compute rewards-to-go $\\hat{R}_t$ and advantage estimates $\\hat{A}_t$ based on the current value function $V_{\\phi_k}$
+Initialize policy parameters $\\theta_0$ and value function parameters $\\phi_0$
+For $k = 0, 1, 2, \\dots$ (1.) Collect set of trajectories $\\mathcal{D}_k = \\{\\tau_i\\}$ by running policy $\\pi_{\\theta_k}$ in the environment (1.) Compute rewards-to-go $\\hat{R}_t$ and advantage estimates $\\hat{A}_t$ based on the current value function $V_{\\phi_k}$
 `,
       `
-3. Optimize surrogate objective with respect to $\\theta$, with $K$ epochs and minibatch size $M \\leq |\\mathcal{D}_k|$:
-       $$\\theta_{k+1} = \\arg \\max_{\\theta} \\frac{1}{|\\mathcal{D}_k|} \\sum_{\\tau \\in \\mathcal{D}_k} \\sum_{t=0}^T \\min\\left( \\frac{\\pi_\\theta(a_t|s_t)}{\\pi_{\\theta_k}(a_t|s_t)} \\hat{A}_t, \\text{clip}\\left(\\frac{\\pi_\\theta(a_t|s_t)}{\\pi_{\\theta_k}(a_t|s_t)}, 1-\\epsilon, 1+\\epsilon\\right) \\hat{A}_t \\right)$$
-   4. Fit value function by regression on mean-squared error:
+Optimize surrogate objective with respect to $\\theta$, with $K$ epochs and minibatch size $M \\leq |\\mathcal{D}_k|$:
+       $$\\theta_{k+1} = \\arg \\max_{\\theta} \\frac{1}{|\\mathcal{D}_k|} \\sum_{\\tau \\in \\mathcal{D}_k} \\sum_{t=0}^T \\min\\left( \\frac{\\pi_\\theta(a_t|s_t)}{\\pi_{\\theta_k}(a_t|s_t)} \\hat{A}_t, \\text{clip}\\left(\\frac{\\pi_\\theta(a_t|s_t)}{\\pi_{\\theta_k}(a_t|s_t)}, 1-\\epsilon, 1+\\epsilon\\right) \\hat{A}_t \\right)$$`,
+      `Fit value function by regression on mean-squared error:
        $$\\phi_{k+1} = \\arg \\min_{\\phi} \\frac{1}{|\\mathcal{D}_k| T} \\sum_{\\tau \\in \\mathcal{D}_k} \\sum_{t=0}^T \\left( V_\\phi(s_t) - \\hat{R}_t \\right)^2$$`,
     ],
   },
@@ -100,13 +100,13 @@ $$L^{CLIP}(\\theta) = \\hat{\\mathbb{E}}_t\\left[ \\min\\left( \\frac{\\pi_\\the
 
 PPO has several advantages compared to other policy gradient methods:
 
-1. **Stability**: PPO uses a surrogate objective that is clipped, which helps maintain stability by avoiding excessively large policy updates. The probability ratio $r_t(\\theta) = \\frac{\\pi_\\theta(a_t|s_t)}{\\pi_{\\theta_{old}}(a_t|s_t)}$ is constrained to stay within $[1-\\epsilon, 1+\\epsilon]$, where $\\epsilon$ is a small constant. 
+**Stability**: PPO uses a surrogate objective that is clipped, which helps maintain stability by avoiding excessively large policy updates. The probability ratio $r_t(\\theta) = \\frac{\\pi_\\theta(a_t|s_t)}{\\pi_{\\theta_{old}}(a_t|s_t)}$ is constrained to stay within $[1-\\epsilon, 1+\\epsilon]$, where $\\epsilon$ is a small constant. `,
 
-2. **Sample Efficiency**: PPO is more sample efficient than methods like TRPO, needing fewer interactions with the environment to achieve good performance. It accomplishes this by allowing multiple epochs of minibatch updates.
+      `**Sample Efficiency**: PPO is more sample efficient than methods like TRPO, needing fewer interactions with the environment to achieve good performance. It accomplishes this by allowing multiple epochs of minibatch updates.`,
 
-3. **Simple to Implement**: The clipped surrogate objective is relatively simple to implement, not requiring complex second-order optimization like TRPO.
+      `**Simple to Implement**: The clipped surrogate objective is relatively simple to implement, not requiring complex second-order optimization like TRPO.`,
 
-4. **Scalability**: PPO has been shown to scale well to challenging environments with high-dimensional observation and action spaces.
+      `**Scalability**: PPO has been shown to scale well to challenging environments with high-dimensional observation and action spaces.
 `,
     ],
   },
