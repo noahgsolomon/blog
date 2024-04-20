@@ -57,26 +57,28 @@ const CHAPTERS = [{ chapter: 1, title: '', checkpointIdx: 0 }]
 
 const CHECKPOINTS = [
   {
+    chapterName: 'Intro to RL',
     position: [-2, 0, 0],
     markdown: [
-      `
-## Proximal Policy Optimization (PPO)
+      `## Reinforcement Learning
 
-PPO is a policy gradient method that alternates between sampling data through interaction with the environment, and optimizing a surrogate objective function using stochastic gradient ascent. The objective function is a clipped surrogate objective:
+RL is a class of algorithms in Machine learning which can learn to navigate an environment in such a way to maximize the cumulative reward it receives. By initially making random actions in states, and being informed of the quality of the action chosen, the agent is able to iteratively approach more optimal generalizations about its environment.
+    `,
+      `A valuable aspect of RL is that we do not even need to understand what the optimal solution will be which maximizes the reward. All that is needed for learning to take place is an environment, a way to observe that environment, and a reward signal which determines the value of any state given the observation representation of the state. For this reason, one particularly important and challenging aspect of RL is how to model the environment states, and what reward we should assign to those states.
+`,
+      `Why do we even need this RL stuff? Can't we just pre-compute the most optimal action to take for any given state? The problem is the scale of possible states to experience and actions to choose from. As an example, if we take an atari screen's pixels as input to learn to play some game, where the size of the screen is 160x192 pixels in grayscale, each pixel would be able to take on 256 different values...
+`,
+      `There being 160x192 different pixels, the total number of states this policy function could receive as input would be 256^(160x192). (costa huang dissertation) For context there are 10^80 atoms in the known universe so this problem is computationally infeasible to pre-compute a state to action mapping table.`,
 
-$$L^{CLIP}(\\theta) = \\hat{\\mathbb{E}}_t\\left[ \\min\\left( \\frac{\\pi_\\theta(a_t|s_t)}{\\pi_{\\theta_{old}}(a_t|s_t)} \\hat{A}_t, \\text{clip}\\left(\\frac{\\pi_\\theta(a_t|s_t)}{\\pi_{\\theta_{old}}(a_t|s_t)}, 1-\\epsilon, 1+\\epsilon\\right) \\hat{A}_t \\right)\\right]$$
+      `The essence of RL is to learn some function approximation called the policy which takes in as input the state of the agent in the environment, and outputs an action to take to move us from the current state to a new state. The chain of state action action pairs an agent experiences is called a trajectory. This trajectory forms an episode, and can either end by reaching a terminal state (out of bounds, or final reward achieved, etc.) or by reaching a trajectory max length T.
 `,
-      `where $\\pi_\\theta$ is the policy, $\\hat{A}_t$ is an estimator of the advantage function at timestep $t$, $\\epsilon$ is a hyperparameter (small constant), and $\\theta_{old}$ is the vector of policy parameters before the update.
-`,
-      `where $\\pi_\\theta$ is the policy, $\\hat{A}_t$ is an estimator of the advantage function at timestep $t$, $\\epsilon$ is a hyperparameter (small constant), and $\\theta_{old}$ is the vector of policy parameters before the update.
-`,
-      `where $\\pi_\\theta$ is the policy, $\\hat{A}_t$ is an estimator of the advantage function at timestep $t$, $\\epsilon$ is a hyperparameter (small constant), and $\\theta_{old}$ is the vector of policy parameters before the update.
-`,
-      `where $\\pi_\\theta$ is the policy, $\\hat{A}_t$ is an estimator of the advantage function at timestep $t$, $\\epsilon$ is a hyperparameter (small constant), and $\\theta_{old}$ is the vector of policy parameters before the update.
+
+      `Fundamentally there are only two phases in training. The first is the data collection step, which is when the agents navigate the environment, collecting information like the state transitions and actions taken, the probability outputted for the action chosen, the reward received from the new state, and more. The next step is the optimization step where we take this information and optimize our policy function so that we discourage taking actions in states which received low reward, and encourage taking actions in states where we received large reward.
 `,
     ],
   },
   {
+    chapterName: 'Intro to RL 2',
     position: [0, 0, 0],
     markdown: [
       `
@@ -93,6 +95,7 @@ Optimize surrogate objective with respect to $\\theta$, with $K$ epochs and mini
     ],
   },
   {
+    chapterName: 'Intro to RL 3',
     position: [2, 0, 0],
     markdown: [
       `
@@ -231,43 +234,34 @@ export default function Page() {
         <AccordionItem className='rounded-lg border px-4 py-1' value='item-1'>
           <AccordionTrigger>
             <div className='flex flex-col gap-1'>
-              <p className='text-yellow-300 font-thin text-xs md:text-sm'>CHAPTER 2</p>
-              <p className='font-thin text-xs md:text-sm text-left'>Learn</p>
+              <p className='text-yellow-300 font-thin text-xs md:text-sm'>CHAPTER {currentPosition}</p>
+              <p className='font-thin text-xs md:text-sm text-left'>
+                {CHECKPOINTS[currentPosition % CHECKPOINTS.length].chapterName}
+              </p>
             </div>
           </AccordionTrigger>
           <AccordionContent className='flex flex-col gap-2'>
-            <AccordionItem className='group' value='chapter-1'>
-              <div className='flex flex-col'>
-                <p className='group-hover:text-blue-500 transition-all font-thin text-primary/70 text-[8px] md:text-[10px]'>
-                  CHAPTER 1
-                </p>
-                <p className='font-thin text-xs md:text-sm'>Learn</p>
-              </div>
-            </AccordionItem>
-            <AccordionItem className='group' value='chapter-2'>
-              <div className='flex flex-col'>
-                <p className='group-hover:text-blue-500 transition-all font-thin text-yellow-300 text-[8px] md:text-[10px]'>
-                  CHAPTER 2
-                </p>
-                <p className='font-thin text-xs md:text-sm'>Learn</p>
-              </div>
-            </AccordionItem>
-            <AccordionItem className='group' value='chapter-3'>
-              <div className='flex flex-col'>
-                <p className='font-thin text-primary/70 group-hover:text-blue-500 transition-all text-[8px] md:text-[10px]'>
-                  CHAPTER 3
-                </p>
-                <p className=' font-thin text-xs md:text-sm'>Explore</p>
-              </div>
-            </AccordionItem>
-            <AccordionItem className='group' value='chapter-4'>
-              <div className='flex flex-col'>
-                <p className='group-hover:text-blue-500 transition-all font-thin  text-primary/70 text-[8px] md:text-[10px]'>
-                  CHAPTER 4
-                </p>
-                <p className='font-thin text-xs md:text-sm'>Build</p>
-              </div>
-            </AccordionItem>
+            {CHECKPOINTS.map((checkpoint, index) => (
+              <AccordionItem
+                onClick={() => {
+                  setFocus(new THREE.Vector3(...CHECKPOINTS[index % CHECKPOINTS.length].position))
+                  setCurrentPosition(index)
+                  setMarkdownIdx(0)
+                }}
+                key={index}
+                className='group'
+                value='chapter-1'
+              >
+                <div className='flex flex-col'>
+                  <p
+                    className={`${index === currentPosition ? 'text-yellow-300' : ''} group-hover:text-blue-500 transition-all font-thin text-primary/70 text-[8px] md:text-[10px]`}
+                  >
+                    CHAPTER {index}
+                  </p>
+                  <p className='font-thin text-xs md:text-sm'>{checkpoint.chapterName}</p>
+                </div>
+              </AccordionItem>
+            ))}
           </AccordionContent>
         </AccordionItem>
       </Accordion>

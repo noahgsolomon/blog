@@ -11,3 +11,5 @@ train/videos/*
 train/models/*
 train/runs/*
 train/wandb/*
+
+public/sw*
