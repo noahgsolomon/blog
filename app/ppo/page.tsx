@@ -73,8 +73,9 @@ RL is a class of algorithms in Machine learning which can learn to navigate an e
       `The essence of RL is to learn some function approximation called the policy which takes in as input the state of the agent in the environment, and outputs an action to take to move us from the current state to a new state. The chain of state action action pairs an agent experiences is called a trajectory. This trajectory forms an episode, and can either end by reaching a terminal state (out of bounds, or final reward achieved, etc.) or by reaching a trajectory max length T.
 `,
 
-      `Fundamentally there are only two phases in training. The first is the data collection step, which is when the agents navigate the environment, collecting information like the state transitions and actions taken, the probability outputted for the action chosen, the reward received from the new state, and more. The next step is the optimization step where we take this information and optimize our policy function so that we discourage taking actions in states which received low reward, and encourage taking actions in states where we received large reward.
+      `Fundamentally there are only two phases in training. The first is the data collection step, which is when the agents navigate the environment, collecting information like the state transitions and actions taken, the probability outputted for the action chosen, the reward received from the new state, and more.
 `,
+      `The next step is the optimization step where we take this information and optimize our policy function so that we discourage taking actions in states which received low reward, and encourage taking actions in states where we received large reward.`,
     ],
   },
   {
@@ -140,8 +141,8 @@ export default function Page() {
         <OrbitControls />
         <Controls zoom={zoom} focus={focus} />
       </View>
-      <div className='shadow-md absolute bottom-1/4 right-4 md:bottom-24 md:right-24 rounded-lg border p-4 bg-card z-10 max-w-[60%] w-[400px] flex max-h-[50%] flex-col gap-4 overflow-y-auto'>
-        <Carousel change={currentPosition}>
+      <div className='shadow-md absolute bottom-1/4 right-4 md:bottom-24 md:right-24 rounded-lg border p-4 bg-card z-10 max-w-[60%] w-[400px] flex flex-col gap-4 max-h-[50%] overflow-y-auto'>
+        <Carousel className='touch-none' change={currentPosition}>
           <CarouselContent className='pointer-events-none'>
             {CHECKPOINTS[currentPosition % CHECKPOINTS.length].markdown.map((markdown, index) => (
               <CarouselItem key={index}>
