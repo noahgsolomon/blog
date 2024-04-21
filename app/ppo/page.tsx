@@ -70,7 +70,7 @@ RL is a class of algorithms in Machine learning which can learn to navigate an e
 `,
       `There being 160x192 different pixels, the total number of states this policy function could receive as input would be 256^(160x192). (costa huang dissertation) For context there are 10^80 atoms in the known universe so this problem is computationally infeasible to pre-compute a state to action mapping table.`,
 
-      `The essence of RL is to learn some function approximation called the policy which takes in as input the state of the agent in the environment, and outputs an action to take to move us from the current state to a new state. The chain of state action action pairs an agent experiences is called a trajectory. This trajectory forms an episode, and can either end by reaching a terminal state (out of bounds, or final reward achieved, etc.) or by reaching a trajectory max length T.
+      `The essence of RL is to learn some function approximation called the policy which takes in as input the state of the agent in the environment, and outputs an action to take to move us from the current state to a new state. The chain of state action pairs an agent experiences is called a trajectory. This trajectory forms an episode, and can either end by reaching a terminal state (out of bounds, or final reward achieved, etc.) or by reaching transition number T where T is the maximum trajectory length.
 `,
 
       `Fundamentally there are only two phases in training. The first is the data collection step, which is when the agents navigate the environment, collecting information like the state transitions and actions taken, the probability outputted for the action chosen, the reward received from the new state, and more.
