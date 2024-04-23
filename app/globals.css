@@ -178,7 +178,7 @@ p {
 }
 
 math {
-  @apply bg-secondary border rounded-lg p-1 max-w-full overflow-x-auto pointer-events-auto !important
+  @apply bg-secondary border rounded-sm p-1 max-w-full overflow-x-auto pointer-events-auto !important
 }
 
 mo, mfrac, mtext, mrow, msup, mi, annotation {
