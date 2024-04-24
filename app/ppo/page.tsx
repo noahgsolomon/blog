@@ -64,20 +64,24 @@ const CHECKPOINTS = [
 
 RL is a class of algorithms in Machine learning which can learn to navigate an environment in such a way to maximize the cumulative reward it receives. By initially making random actions in states, and being informed of the quality of the action chosen, the agent is able to iteratively approach more optimal generalizations about its environment.
     `,
-      `A valuable aspect of RL is that we do not even need to understand what the optimal solution will be which maximizes the reward. All that is needed for learning to take place is an environment, a way to observe that environment, and a reward signal which determines the value of any state given the observation representation of the state. For this reason, one particularly important and challenging aspect of RL is how to model the environment states, and what reward we should assign to those states.
+      `A valuable aspect of RL is that we do not even need to understand what the optimal solution will be which maximizes the reward. All that is needed for learning to take place is an environment, a way to observe that environment, and a reward signal which determines the value of any state given the observation representation of the state. For this reason, one particularly important and challenging aspect of RL is 
+\`\`\`blue
+how to model the environment states, and what reward we should assign to those states.
+\`\`\`
 `,
       `Why do we even need this RL stuff? Can't we just pre-compute the most optimal action to take for any given state? The problem is the scale of possible states to experience and actions to choose from. As an example, if we take an atari screen's pixels as input to learn to play some game, where the size of the screen is 160x192 pixels in grayscale, each pixel would be able to take on 256 different values...
 `,
-      `There being 160x192 different pixels, the total number of states this policy function could receive as input would be 256^(160x192). (costa huang dissertation) For context there are 10^80 atoms in the known universe so this problem is computationally infeasible to pre-compute a state to action mapping table.`,
+      ` There being $160 \\times 192$ different pixels, the total number of states this policy function could receive as input would be $256^{(160 \\times 192)}$. (Costa Huang dissertation) For context, there are $10^{80}$ atoms in the known universe, so this problem is computationally infeasible to pre-compute a state-to-action mapping table.`,
+      `The essence of RL is to learn some function approximation called the policy, denoted as $\\pi$, which takes in as input the state $s$ of the agent in the environment and outputs an action $a$ to take to move us from the current state to a new state.`,
+      ` The chain of state-action pairs an agent experiences is called a trajectory, denoted as $\\tau = (s_0, a_0, s_1, a_1, \\dots, s_T)$. This trajectory forms an episode, and can either end by reaching a terminal state (out of bounds, or final reward achieved, etc.) or by taking $T$ transitions, where $T$ is the maximum trajectory length.`,
 
-      `The essence of RL is to learn some function approximation called the policy which takes in as input the state of the agent in the environment, and outputs an action to take to move us from the current state to a new state. The chain of state action pairs an agent experiences is called a trajectory. This trajectory forms an episode, and can either end by reaching a terminal state (out of bounds, or final reward achieved, etc.) or by taking T transitions where T is the maximum trajectory length.
-`,
-
-      `Fundamentally there are only two phases in training. The first is the data collection step, which is when the agents navigate the environment, collecting information like the state transitions and actions taken, the probability outputted for the action chosen, the reward received from the new state, and more. Mathematically, we can represent this as a tuple $(s_t, a_t, r_t, s_{t+1}, \\pi_\\theta(a_t|s_t))$, where $s_t$ is the current state, $a_t$ is the action taken, $r_t$ is the reward received, $s_{t+1}$ is the next state, and $\\pi_\\theta(a_t|s_t)$ is the probability of taking action $a_t$ given state $s_t$ under the current policy $\\pi_\\theta$.`,
-      `The next step is the optimization step where we take this information and optimize our policy function $\\pi_\\theta$ so that we discourage taking actions in states which received low reward, and encourage taking actions in states where we received large reward. This can be achieved by maximizing the expected cumulative reward $J(\\theta) = \\mathbb{E}_{\\tau \\sim \\pi_\\theta}[\\sum_{t=0}^T \\gamma^t r_t]$, where $\\tau$ is a trajectory sampled from the policy $\\pi_\\theta$, $\\gamma$ is the discount factor, and $T$ is the horizon length. By updating the policy parameters $\\theta$ using gradient ascent on $J(\theta)$, we can improve the policy to take actions that lead to higher rewards.`,
-
+      `Fundamentally there are only two phases in training. The first is the data collection step, which is when the agents navigate the environment, collecting information like the state transitions and actions taken, the probability outputted for the action chosen, the reward received from the new state, and more.`,
+      `Mathematically, we can represent this as a tuple $(s_t, a_t, r_t, s_{t+1}, \\pi_\\theta(a_t|s_t))$, where $s_t$ is the current state, $a_t$ is the action taken, $r_t$ is the reward received, $s_{t+1}$ is the next state, and $\\pi_\\theta(a_t|s_t)$ is the probability of taking action $a_t$ given state $s_t$ under the current policy $\\pi_\\theta$.`,
+      `The next step is the optimization step where we take this information and optimize our policy function $\\pi_\\theta$ so that we discourage taking actions in states which received low reward, and encourage taking actions in states where we received large reward.`,
+      `This can be achieved by maximizing the expected cumulative reward $J(\\theta) = \\mathbb{E}_{\\tau \\sim \\pi_\\theta}[\\sum_{t=0}^T \\gamma^t r_t]$, where $\\tau$ is a trajectory sampled from the policy $\\pi_\\theta$, $\\gamma$ is the discount factor, and $T$ is the horizon length. By updating the policy parameters $\\theta$ using gradient ascent on $J(\\theta)$, we can improve the policy to take actions that lead to higher rewards.`,
       `If you get anything from this section it should be this: An agent is situation in environment $E$, in which it observed states $s_t$ where $s \\in S$, the possibly infinite number of different states an agent might find itself, for all timesteps $t$, where $1 \\leq t \\leq T$, $T$ being the max trajectory length... `,
-      `When situated in state $s_t$, the objective is to pick an action $a_t$ in which is most optimal with respect to our cumulative reward received. $a_t$ denotes the action we pick at time step $t$ based on our observation in $s_t$. Once we take this action, we arive in a new state $s_{t+1}$ which yields a reward $r_t$. Note, we ourselves need to come up with some reward function, which is what we want the critic (will explain more later) to predict as accurately as possible. $a_t$ is within the set $A$, where $A$ is all possible actions we can take. For simplicity, we can assume all actions in the set $A$ are valid for all states. `,
+      `When situated in state $s_t$, the objective is to pick an action $a_t$ in which is most optimal with respect to our cumulative reward received. $a_t$ denotes the action we pick at time step $t$ based on our observation in $s_t$. Once we take this action, we arive in a new state $s_{t+1}$ which yields a reward $r_t$.`,
+      `Note, we ourselves need to come up with some reward function, which is what we want the critic (will explain more later) to predict as accurately as possible. $a_t$ is within the set $A$, where $A$ is all possible actions we can take. For simplicity, we can assume all actions in the set $A$ are valid for all states. (PPO Explained Paper)`,
       `So the one sentence TL;DR:
       
 Learn a function to convert states to actions s.t. the cumulative reward is maximized.`,
@@ -88,16 +92,10 @@ Learn a function to convert states to actions s.t. the cumulative reward is maxi
     position: [0, 0, 0],
     markdown: [
       `
-## PPO Algorithm
-
-Initialize policy parameters $\\theta_0$ and value function parameters $\\phi_0$
-For $k = 0, 1, 2, \\dots$ (1.) Collect set of trajectories $\\mathcal{D}_k = \\{\\tau_i\\}$ by running policy $\\pi_{\\theta_k}$ in the environment (1.) Compute rewards-to-go $\\hat{R}_t$ and advantage estimates $\\hat{A}_t$ based on the current value function $V_{\\phi_k}$
-`,
-      `
-Optimize surrogate objective with respect to $\\theta$, with $K$ epochs and minibatch size $M \\leq |\\mathcal{D}_k|$:
-       $$\\theta_{k+1} = \\arg \\max_{\\theta} \\frac{1}{|\\mathcal{D}_k|} \\sum_{\\tau \\in \\mathcal{D}_k} \\sum_{t=0}^T \\min\\left( \\frac{\\pi_\\theta(a_t|s_t)}{\\pi_{\\theta_k}(a_t|s_t)} \\hat{A}_t, \\text{clip}\\left(\\frac{\\pi_\\theta(a_t|s_t)}{\\pi_{\\theta_k}(a_t|s_t)}, 1-\\epsilon, 1+\\epsilon\\right) \\hat{A}_t \\right)$$`,
-      `Fit value function by regression on mean-squared error:
-       $$\\phi_{k+1} = \\arg \\min_{\\phi} \\frac{1}{|\\mathcal{D}_k| T} \\sum_{\\tau \\in \\mathcal{D}_k} \\sum_{t=0}^T \\left( V_\\phi(s_t) - \\hat{R}_t \\right)^2$$`,
+  \`\`\`blue
+  console.log('Hello, world!');
+  \`\`\`
+  `,
     ],
   },
   {
@@ -146,32 +144,12 @@ export default function Page() {
         <OrbitControls />
         <Controls zoom={zoom} focus={focus} />
       </View>
-      <div className='shadow-md absolute bottom-1/4 right-4 md:bottom-24 md:right-24 rounded-lg border p-4 bg-card z-10 max-w-[60%] w-[400px] flex flex-col gap-4 max-h-[50%] overflow-y-auto'>
+      <div className='shadow-md absolute bottom-1/4 right-4 md:bottom-24 md:right-24 rounded-lg border p-4 bg-card z-10 max-w-[60%] w-[400px] flex flex-col gap-4 max-h-[50%] overflow-y-hidden'>
         <Carousel className='touch-none' change={currentPosition}>
-          <CarouselContent className='pointer-events-none'>
+          <CarouselContent className='h-[300px] overflow-y-auto border rounded-lg p-1 bg-popover'>
             {CHECKPOINTS[currentPosition % CHECKPOINTS.length].markdown.map((markdown, index) => (
               <CarouselItem key={index}>
-                <Markdown
-                  components={{
-                    code: ({ className, children, ...props }) => {
-                      const match = /language-(\w+)/.exec(className ?? '')
-                      return match ? (
-                        <div>
-                          <p className='code-language'>{match[1]}</p>
-                          <pre className={cn(className)}>
-                            <code>{children}</code>
-                          </pre>
-                        </div>
-                      ) : (
-                        <code className={className} {...props}>
-                          {children}
-                        </code>
-                      )
-                    },
-                  }}
-                  remarkPlugins={[remarkGfm, remarkMath]}
-                  rehypePlugins={[rehypeKatex, rehypeHighlight]}
-                >
+                <Markdown remarkPlugins={[remarkGfm, remarkMath]} rehypePlugins={[rehypeKatex, rehypeHighlight]}>
                   {markdown}
                 </Markdown>
               </CarouselItem>
