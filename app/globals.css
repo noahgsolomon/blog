@@ -177,10 +177,6 @@ code {
   @apply hidden
 }
 
-h1, h2, h3 {
-  @apply text-base md:text-lg
-}
-
 p {
   @apply text-xs md:text-sm text-primary
 }
