@@ -2,6 +2,13 @@
 @tailwind components;
 @tailwind utilities;
 
+@font-face {
+  font-family: 'Krypton';
+  src: url('../public/krypton.otf') format('opentype');
+  font-weight: normal;
+  font-style: normal;
+}
+
 @layer base {
   :root {
     --background: 0 0% 100%;
@@ -72,7 +79,7 @@
   }
 
   body {
-    @apply bg-background text-foreground;
+    @apply bg-background text-foreground font-krypton;
   }
 
   code {
@@ -89,6 +96,7 @@
   }
 }
 
+
 image {
   width: auto;
   height: auto;
@@ -96,25 +104,21 @@ image {
 
 /* General styling for the code block */
 .hljs {
-  @apply overflow-x-auto font-mono !important
-}
-
-pre {
-  @apply max-w-full overflow-x-auto bg-card p-2 rounded-lg border border-border !important;
+  @apply overflow-x-auto font-thin !important
 }
 
 code {
-  @apply whitespace-pre-wrap text-primary !important;
+  @apply whitespace-pre-wrap text-primary font-krypton !important;
   /* This will wrap the text inside the code block */
 }
 
 .code-language {
-  @apply font-bold text-[#555] bg-[#eee] px-2 py-1 rounded-lg text-sm mb-2 inline-block !important;
+  @apply text-[#555] bg-[#eee] px-2 py-1 rounded-lg text-sm mb-2 inline-block !important;
 }
 
 /* Keyword styling (like def, if, else, return) */
 .hljs-keyword {
-  @apply text-[#a626a4] font-bold !important;
+  @apply text-[#a626a4] !important;
   /* Purple */
 }
 
@@ -165,6 +169,10 @@ code {
   /* Blue */
 }
 
+.language-blue {
+  @apply bg-blue-500/50 rounded-none
+}
+
 .katex-html {
   @apply hidden
 }
@@ -174,7 +182,7 @@ h1, h2, h3 {
 }
 
 p {
-  @apply text-xs md:text-sm text-primary/80
+  @apply text-xs md:text-sm text-primary
 }
 
 math {
@@ -183,4 +191,8 @@ math {
 
 mo, mfrac, mtext, mrow, msup, mi, annotation {
   @apply text-[10px]
+}
+
+li {
+  @apply text-xs list-disc ml-4 text-primary
 }
