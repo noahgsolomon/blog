@@ -175,10 +175,11 @@ CarouselItem.displayName = 'CarouselItem'
 
 type CarouselPreviousProps = React.ComponentProps<typeof Button> & {
   setMarkdownIdx: React.Dispatch<React.SetStateAction<number>>
+  carouselContentRef: React.RefObject<HTMLDivElement>
 }
 
 const CarouselPrevious = React.forwardRef<HTMLButtonElement, CarouselPreviousProps>(
-  ({ className, variant = 'outline', size = 'icon', setMarkdownIdx, ...props }, ref) => {
+  ({ className, variant = 'outline', size = 'icon', setMarkdownIdx, carouselContentRef, ...props }, ref) => {
     const { scrollPrev, canScrollPrev } = useCarousel()
 
     return (
@@ -187,10 +188,10 @@ const CarouselPrevious = React.forwardRef<HTMLButtonElement, CarouselPreviousPro
         variant={variant}
         size={size}
         className={cn('size-6', className)}
-        disabled={!canScrollPrev}
         onClick={() => {
           scrollPrev()
           setMarkdownIdx((prev) => prev - 1)
+          carouselContentRef.current?.firstElementChild?.scrollIntoView({ behavior: 'smooth' })
         }}
         {...props}
       >
@@ -204,10 +205,11 @@ CarouselPrevious.displayName = 'CarouselPrevious'
 
 type CarouselNextProps = React.ComponentProps<typeof Button> & {
   setMarkdownIdx: React.Dispatch<React.SetStateAction<number>>
+  carouselContentRef: React.RefObject<HTMLDivElement>
 }
 
 const CarouselNext = React.forwardRef<HTMLButtonElement, CarouselNextProps>(
-  ({ className, variant = 'outline', size = 'icon', setMarkdownIdx, ...props }, ref) => {
+  ({ className, variant = 'outline', size = 'icon', setMarkdownIdx, carouselContentRef, ...props }, ref) => {
     const { scrollNext, canScrollNext } = useCarousel()
 
     return (
@@ -216,10 +218,10 @@ const CarouselNext = React.forwardRef<HTMLButtonElement, CarouselNextProps>(
         variant={variant}
         size={size}
         className={cn('size-6', className)}
-        disabled={!canScrollNext}
         onClick={() => {
           scrollNext()
           setMarkdownIdx((prev) => prev + 1)
+          carouselContentRef.current?.firstElementChild?.scrollIntoView({ behavior: 'smooth' })
         }}
         {...props}
       >

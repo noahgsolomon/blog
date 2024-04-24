@@ -2,7 +2,7 @@
 
 import { OrbitControls, PerspectiveCamera, PresentationControls } from '@react-three/drei'
 import dynamic from 'next/dynamic'
-import { Fragment, useEffect, useMemo, useState } from 'react'
+import { Fragment, useEffect, useMemo, useRef, useState } from 'react'
 import Lights from '@/Lights'
 import PPO from './PPO'
 import * as THREE from 'three'
@@ -123,6 +123,8 @@ export default function Page() {
   const [currentPosition, setCurrentPosition] = useState(0)
   const [markdownIdx, setMarkdownIdx] = useState(0)
 
+  const carouselContentRef = useRef(null)
+
   useEffect(() => {
     setZoom(true)
     setFocus(new THREE.Vector3(...CHECKPOINTS[0].position))
@@ -141,17 +143,12 @@ export default function Page() {
         <OrbitControls />
         <Controls zoom={zoom} focus={focus} />
       </View>
-      <div className='shadow-md absolute bottom-1/4 right-4 md:bottom-24 md:right-24 rounded-lg border p-4  z-10 max-w-[60%] w-[400px] flex flex-col gap-4 max-h-[50%] overflow-y-hidden bg-card'>
+      <div className='shadow-md absolute bottom-1/4 right-4 md:bottom-24 md:right-24 rounded-lg border p-4 bg-card z-10 max-w-[60%] w-[400px] flex flex-col gap-4 max-h-[50%] overflow-y-hidden'>
         <Carousel className='touch-none' change={currentPosition}>
-          <CarouselContent className='h-[300px] shadow-inner overflow-y-auto border rounded-lg p-4 relative'>
-            <div className='absolute bg-white/10 -top-4 -z-10 -left-[16px] h-[110%] w-[50px]' />
-            <div className='absolute bg-[#f9fb00]/10 -top-4 -z-10 left-[34px] h-[110%] w-[50px]' />
-            <div className='absolute bg-[#02feff]/10 -top-4 -z-10 left-[84px] h-[110%] w-[50px]' />
-            <div className='absolute bg-[#01ff00]/10 -top-4 -z-10 left-[134px] h-[110%] w-[50px]' />
-            <div className='absolute bg-[#fd00fb]/10 -top-4 -z-10 left-[184px] h-[110%] w-[50px]' />
-            <div className='absolute bg-[#fb0102]/10 -top-4 -z-10 left-[234px] h-[110%] w-[50px]' />
-            <div className='absolute bg-[#0301fc]/10 -top-4 -z-10 left-[284px] h-[110%] w-[50px]' />
-            <div className='absolute bg-black/10 -top-4 -z-10 left-[334px] h-[110%] w-[50px]' />
+          <CarouselContent
+            ref={carouselContentRef}
+            className='h-[300px] shadow-inner overflow-y-auto border rounded-lg p-4 relative bg-popover'
+          >
             {CHECKPOINTS[currentPosition % CHECKPOINTS.length].markdown.map((markdown, index) => (
               <CarouselItem key={index}>
                 <Markdown
@@ -164,7 +161,7 @@ export default function Page() {
             ))}
           </CarouselContent>
           <div className='flex w-full justify-center gap-4 pt-4 items-center'>
-            <CarouselPrevious setMarkdownIdx={setMarkdownIdx} />
+            <CarouselPrevious carouselContentRef={carouselContentRef} setMarkdownIdx={setMarkdownIdx} />
             <p className='font-bold text-xl'>
               {[
                 ...Array.from({ length: CHECKPOINTS[currentPosition % CHECKPOINTS.length].markdown.length }).map(
@@ -183,7 +180,7 @@ export default function Page() {
                 ),
               ]}
             </p>
-            <CarouselNext setMarkdownIdx={setMarkdownIdx} />
+            <CarouselNext carouselContentRef={carouselContentRef} setMarkdownIdx={setMarkdownIdx} />
           </div>
         </Carousel>
         <div className='w-full flex flex-row gap-1'>
@@ -225,7 +222,9 @@ export default function Page() {
         <AccordionItem className='rounded-lg border px-4 py-1' value='item-1'>
           <AccordionTrigger>
             <div className='flex flex-col gap-1'>
-              <p className='text-yellow-300 font-thin text-xs md:text-sm'>CHAPTER {currentPosition}</p>
+              <p className='text-yellow-300 font-thin text-xs md:text-sm'>
+                CHAPTER {currentPosition % CHECKPOINTS.length}
+              </p>
               <p className='font-thin text-xs md:text-sm text-left'>
                 {CHECKPOINTS[currentPosition % CHECKPOINTS.length].chapterName}
               </p>
