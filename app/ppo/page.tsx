@@ -19,8 +19,6 @@ import remarkMath from 'remark-math'
 import rehypeHighlight from 'rehype-highlight'
 import remarkGfm from 'remark-gfm'
 import rehypeKatex from 'rehype-katex'
-import DOMpurify from 'dompurify'
-import { Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious } from '@/components/ui/carousel'
 
 const View = dynamic(() => import('@/components/canvas/View').then((mod) => mod.View), {
   ssr: false,
@@ -129,7 +127,7 @@ export default function Page() {
   const [currentPosition, setCurrentPosition] = useState(0)
   const [markdownIdx, setMarkdownIdx] = useState(0)
 
-  const markdownRef = useRef(null)
+  const markdownContainerRef = useRef(null)
 
   useEffect(() => {
     setZoom(true)
@@ -149,12 +147,20 @@ export default function Page() {
         <OrbitControls />
         <Controls zoom={zoom} focus={focus} />
       </View>
-      <div className='shadow-md absolute bottom-1/4 right-4 md:bottom-24 md:right-24 rounded-lg border p-4 bg-card z-10 max-w-[60%] w-[400px] flex flex-col gap-4 max-h-[50%] overflow-y-hidden'>
+      <div className='shadow-md absolute bottom-1/4 right-4 md:bottom-24 md:right-24 rounded-lg border p-4 bg-[#faf0e6] dark:bg-card z-10 max-w-[60%] w-[400px] flex flex-col gap-4 max-h-[50%] overflow-y-hidden overflow-x-hidden'>
         <div>
           <div
-            ref={markdownRef}
-            className='h-[300px] shadow-inner overflow-y-auto border rounded-lg p-4 relative bg-popover'
+            ref={markdownContainerRef}
+            className='relative bg-popover h-[300px] shadow-inner overflow-y-auto border rounded-lg p-4'
           >
+            <div className='absolute bg-white/10 -top-4  -left-[16px] max-h-[400%] w-[50px]' />
+            <div className='absolute bg-[#f9fb00]/10 -top-4  left-[34px] h-full w-[50px]' />
+            <div className='absolute bg-[#02feff]/10 -top-4  left-[84px] h-full w-[50px]' />
+            <div className='absolute bg-[#01ff00]/10 -top-4  left-[134px] h-full w-[50px]' />
+            <div className='absolute bg-[#fd00fb]/10 -top-4  left-[184px] h-full w-[50px]' />
+            <div className='absolute bg-[#fb0102]/10 -top-4  left-[234px] h-full w-[50px]' />
+            <div className='absolute bg-[#0301fc]/10 -top-4  left-[284px] h-full w-[50px]' />
+            <div className='absolute bg-black/10 -top-4  left-[334px] h-full w-[50px]' />
             <Markdown remarkPlugins={[remarkGfm, remarkMath]} rehypePlugins={[rehypeKatex, rehypeHighlight, rehypeRaw]}>
               {CHECKPOINTS[currentPosition % CHECKPOINTS.length].markdown[markdownIdx]}
             </Markdown>
@@ -167,7 +173,7 @@ export default function Page() {
               disabled={markdownIdx <= 0}
               onClick={() => {
                 setMarkdownIdx((prev) => prev - 1)
-                markdownRef.current?.firstElementChild?.scrollIntoView()
+                markdownContainerRef.current?.firstElementChild?.scrollIntoView()
               }}
             >
               <ArrowLeft className='size-4' />
@@ -197,7 +203,7 @@ export default function Page() {
               disabled={markdownIdx >= CHECKPOINTS[currentPosition % CHECKPOINTS.length].markdown.length - 1}
               onClick={() => {
                 setMarkdownIdx((prev) => prev + 1)
-                markdownRef.current?.firstElementChild?.scrollIntoView()
+                markdownContainerRef.current?.firstElementChild?.scrollIntoView()
               }}
             >
               <ArrowRight className='size-4' />
@@ -214,7 +220,7 @@ export default function Page() {
               setFocus(new THREE.Vector3(...CHECKPOINTS[(currentPosition - 1) % CHECKPOINTS.length].position))
               setCurrentPosition((prev) => prev - 1)
               setMarkdownIdx(0)
-              markdownRef.current?.firstElementChild?.scrollIntoView()
+              markdownContainerRef.current?.firstElementChild?.scrollIntoView()
             }}
           >
             Back
@@ -226,7 +232,7 @@ export default function Page() {
               setFocus(new THREE.Vector3(...CHECKPOINTS[(currentPosition + 1) % CHECKPOINTS.length].position))
               setCurrentPosition((prev) => prev + 1)
               setMarkdownIdx(0)
-              markdownRef.current?.firstElementChild?.scrollIntoView()
+              markdownContainerRef.current?.firstElementChild?.scrollIntoView()
             }}
           >
             Continue
