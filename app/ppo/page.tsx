@@ -151,19 +151,24 @@ export default function Page() {
         <div>
           <div
             ref={markdownContainerRef}
-            className='relative bg-popover h-[300px] shadow-inner overflow-y-auto border rounded-lg p-4'
+            className='bg-popover h-[300px] shadow-inner overflow-y-auto border rounded-lg p-4'
           >
-            <div className='absolute bg-white/10 -top-4  -left-[16px] max-h-[400%] w-[50px]' />
-            <div className='absolute bg-[#f9fb00]/10 -top-4  left-[34px] h-full w-[50px]' />
-            <div className='absolute bg-[#02feff]/10 -top-4  left-[84px] h-full w-[50px]' />
-            <div className='absolute bg-[#01ff00]/10 -top-4  left-[134px] h-full w-[50px]' />
-            <div className='absolute bg-[#fd00fb]/10 -top-4  left-[184px] h-full w-[50px]' />
-            <div className='absolute bg-[#fb0102]/10 -top-4  left-[234px] h-full w-[50px]' />
-            <div className='absolute bg-[#0301fc]/10 -top-4  left-[284px] h-full w-[50px]' />
-            <div className='absolute bg-black/10 -top-4  left-[334px] h-full w-[50px]' />
-            <Markdown remarkPlugins={[remarkGfm, remarkMath]} rehypePlugins={[rehypeKatex, rehypeHighlight, rehypeRaw]}>
-              {CHECKPOINTS[currentPosition % CHECKPOINTS.length].markdown[markdownIdx]}
-            </Markdown>
+            <div className='relative'>
+              <div className='absolute bg-white/10 -top-4  -left-[16px] h-[110%] w-[50px]' />
+              <div className='absolute bg-[#f9fb00]/10 -top-4  left-[34px] h-[110%] w-[50px]' />
+              <div className='absolute bg-[#02feff]/10 -top-4  left-[84px] h-[110%] w-[50px]' />
+              <div className='absolute bg-[#01ff00]/10 -top-4  left-[134px] h-[110%] w-[50px]' />
+              <div className='absolute bg-[#fd00fb]/10 -top-4  left-[184px] h-[110%] w-[50px]' />
+              <div className='absolute bg-[#fb0102]/10 -top-4  left-[234px] h-[110%] w-[50px]' />
+              <div className='absolute bg-[#0301fc]/10 -top-4  left-[284px] h-[110%] w-[50px]' />
+              <div className='absolute bg-black/10 -top-4  left-[334px] h-full w-[50px]' />
+              <Markdown
+                remarkPlugins={[remarkGfm, remarkMath]}
+                rehypePlugins={[rehypeKatex, rehypeHighlight, rehypeRaw]}
+              >
+                {CHECKPOINTS[currentPosition % CHECKPOINTS.length].markdown[markdownIdx]}
+              </Markdown>
+            </div>
           </div>
           <div className='flex w-full justify-center gap-4 pt-4 items-center'>
             <Button
