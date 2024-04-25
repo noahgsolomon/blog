@@ -13,7 +13,7 @@ import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from '@/
 import rehypeRaw from 'rehype-raw'
 import ThemeButton from '@/components/ThemeButton'
 import Link from 'next/link'
-import { ChevronLeft } from 'lucide-react'
+import { ArrowLeft, ArrowRight, ChevronLeft } from 'lucide-react'
 import Markdown from 'react-markdown'
 import remarkMath from 'remark-math'
 import rehypeHighlight from 'rehype-highlight'
@@ -102,8 +102,14 @@ Note, we ourselves need to come up with some reward function, which is what we w
     chapterName: 'Intro to RL 2',
     position: [0, 0, 0],
     markdown: [
-      `
-  `,
+      `### The essence
+<br></br>
+The essence of RL is to learn some function approximation called the policy, denoted as $\\pi$, which takes in as input the state $s$ of the agent in the environment and outputs an action $a$ to take to move us from the current state to a new state.
+<br></br>
+The chain of state-action pairs an agent experiences is called a trajectory, denoted as $\\tau = (s_0, a_0, s_1, a_1, \\dots, s_T)$.
+<br></br>
+This trajectory forms an episode, and can either end by reaching a terminal state (out of bounds, or final reward achieved, etc.) or by taking $T$ transitions, where $T$ is the maximum trajectory length.
+`,
     ],
   },
   {
@@ -123,7 +129,7 @@ export default function Page() {
   const [currentPosition, setCurrentPosition] = useState(0)
   const [markdownIdx, setMarkdownIdx] = useState(0)
 
-  const carouselContentRef = useRef(null)
+  const markdownRef = useRef(null)
 
   useEffect(() => {
     setZoom(true)
@@ -144,24 +150,28 @@ export default function Page() {
         <Controls zoom={zoom} focus={focus} />
       </View>
       <div className='shadow-md absolute bottom-1/4 right-4 md:bottom-24 md:right-24 rounded-lg border p-4 bg-card z-10 max-w-[60%] w-[400px] flex flex-col gap-4 max-h-[50%] overflow-y-hidden'>
-        <Carousel className='touch-none' change={currentPosition}>
-          <CarouselContent
-            ref={carouselContentRef}
+        <div>
+          <div
+            ref={markdownRef}
             className='h-[300px] shadow-inner overflow-y-auto border rounded-lg p-4 relative bg-popover'
           >
-            {CHECKPOINTS[currentPosition % CHECKPOINTS.length].markdown.map((markdown, index) => (
-              <CarouselItem key={index}>
-                <Markdown
-                  remarkPlugins={[remarkGfm, remarkMath]}
-                  rehypePlugins={[rehypeKatex, rehypeHighlight, rehypeRaw]}
-                >
-                  {markdown}
-                </Markdown>
-              </CarouselItem>
-            ))}
-          </CarouselContent>
+            <Markdown remarkPlugins={[remarkGfm, remarkMath]} rehypePlugins={[rehypeKatex, rehypeHighlight, rehypeRaw]}>
+              {CHECKPOINTS[currentPosition % CHECKPOINTS.length].markdown[markdownIdx]}
+            </Markdown>
+          </div>
           <div className='flex w-full justify-center gap-4 pt-4 items-center'>
-            <CarouselPrevious carouselContentRef={carouselContentRef} setMarkdownIdx={setMarkdownIdx} />
+            <Button
+              variant='outline'
+              size='icon'
+              className='size-6'
+              disabled={markdownIdx <= 0}
+              onClick={() => {
+                setMarkdownIdx((prev) => prev - 1)
+                markdownRef.current?.firstElementChild?.scrollIntoView()
+              }}
+            >
+              <ArrowLeft className='size-4' />
+            </Button>
             <p className='font-bold text-xl'>
               {[
                 ...Array.from({ length: CHECKPOINTS[currentPosition % CHECKPOINTS.length].markdown.length }).map(
@@ -180,9 +190,20 @@ export default function Page() {
                 ),
               ]}
             </p>
-            <CarouselNext carouselContentRef={carouselContentRef} setMarkdownIdx={setMarkdownIdx} />
+            <Button
+              size='icon'
+              variant='outline'
+              className='size-6'
+              disabled={markdownIdx >= CHECKPOINTS[currentPosition % CHECKPOINTS.length].markdown.length - 1}
+              onClick={() => {
+                setMarkdownIdx((prev) => prev + 1)
+                markdownRef.current?.firstElementChild?.scrollIntoView()
+              }}
+            >
+              <ArrowRight className='size-4' />
+            </Button>
           </div>
-        </Carousel>
+        </div>
         <div className='w-full flex flex-row gap-1'>
           <Button
             disabled={currentPosition === 0}
@@ -193,6 +214,7 @@ export default function Page() {
               setFocus(new THREE.Vector3(...CHECKPOINTS[(currentPosition - 1) % CHECKPOINTS.length].position))
               setCurrentPosition((prev) => prev - 1)
               setMarkdownIdx(0)
+              markdownRef.current?.firstElementChild?.scrollIntoView()
             }}
           >
             Back
@@ -204,6 +226,7 @@ export default function Page() {
               setFocus(new THREE.Vector3(...CHECKPOINTS[(currentPosition + 1) % CHECKPOINTS.length].position))
               setCurrentPosition((prev) => prev + 1)
               setMarkdownIdx(0)
+              markdownRef.current?.firstElementChild?.scrollIntoView()
             }}
           >
             Continue
