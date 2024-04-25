@@ -13,12 +13,13 @@ import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from '@/
 import rehypeRaw from 'rehype-raw'
 import ThemeButton from '@/components/ThemeButton'
 import Link from 'next/link'
-import { ArrowLeft, ArrowRight, ChevronLeft } from 'lucide-react'
+import { ArrowLeft, ArrowRight, ChevronLeft, Dot } from 'lucide-react'
 import Markdown from 'react-markdown'
 import remarkMath from 'remark-math'
 import rehypeHighlight from 'rehype-highlight'
 import remarkGfm from 'remark-gfm'
 import rehypeKatex from 'rehype-katex'
+import Image from 'next/image'
 
 const View = dynamic(() => import('@/components/canvas/View').then((mod) => mod.View), {
   ssr: false,
@@ -147,22 +148,23 @@ export default function Page() {
         <OrbitControls />
         <Controls zoom={zoom} focus={focus} />
       </View>
-      <div className='shadow-md absolute bottom-1/4 right-4 md:bottom-24 md:right-24 rounded-lg border p-4 bg-[#faf0e6] dark:bg-card z-10 max-w-[60%] w-[400px] flex flex-col gap-4 max-h-[50%] overflow-y-hidden overflow-x-hidden'>
+      <div className='shadow-md absolute bottom-1/4 right-4 md:bottom-24 md:right-24 rounded-lg border p-4 z-10 bg-[#faf0e6] dark:bg-card max-w-[60%] w-[400px] flex flex-col gap-4 max-h-[50%] overflow-y-hidden '>
         <div>
           <div
             ref={markdownContainerRef}
-            className='bg-popover h-[300px] shadow-inner overflow-y-auto border rounded-lg p-4'
+            className='bg-popover h-[300px] shadow-inner overflow-y-auto overflow-x-hidden border rounded-lg p-4'
           >
             <div className='relative'>
-              <div className='absolute bg-white/10 -top-4  -left-[16px] h-[110%] w-[50px]' />
-              <div className='absolute bg-[#f9fb00]/10 -top-4  left-[34px] h-[110%] w-[50px]' />
-              <div className='absolute bg-[#02feff]/10 -top-4  left-[84px] h-[110%] w-[50px]' />
-              <div className='absolute bg-[#01ff00]/10 -top-4  left-[134px] h-[110%] w-[50px]' />
-              <div className='absolute bg-[#fd00fb]/10 -top-4  left-[184px] h-[110%] w-[50px]' />
-              <div className='absolute bg-[#fb0102]/10 -top-4  left-[234px] h-[110%] w-[50px]' />
-              <div className='absolute bg-[#0301fc]/10 -top-4  left-[284px] h-[110%] w-[50px]' />
-              <div className='absolute bg-black/10 -top-4  left-[334px] h-full w-[50px]' />
+              <div className='absolute bg-white/[7.5%] -top-4  -left-[16px] h-[110%] w-[50px]' />
+              <div className='absolute bg-[#f9fb00]/[7.5%] -top-4  left-[34px] h-[110%] w-[50px]' />
+              <div className='absolute bg-[#02feff]/[7.5%]  -top-4  left-[84px] h-[110%] w-[50px]' />
+              <div className='absolute bg-[#01ff00]/[7.5%] -top-4  left-[134px] h-[110%] w-[50px]' />
+              <div className='absolute bg-[#fd00fb]/[7.5%]  -top-4  left-[184px] h-[110%] w-[50px]' />
+              <div className='absolute bg-[#fb0102]/[7.5%]  -top-4  left-[234px] h-[110%] w-[50px]' />
+              <div className='absolute bg-[#0301fc]/[7.5%] -top-4  left-[284px] h-[110%] w-[50px]' />
+              <div className='absolute bg-black/[7.5%] -top-4  left-[334px] h-full w-[50px]' />
               <Markdown
+                className='z-10 relative'
                 remarkPlugins={[remarkGfm, remarkMath]}
                 rehypePlugins={[rehypeKatex, rehypeHighlight, rehypeRaw]}
               >
