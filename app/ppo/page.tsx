@@ -13,13 +13,14 @@ import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from '@/
 import rehypeRaw from 'rehype-raw'
 import ThemeButton from '@/components/ThemeButton'
 import Link from 'next/link'
-import { ArrowLeft, ArrowRight, ChevronLeft, Dot } from 'lucide-react'
+import { ArrowLeft, ArrowRight, ChevronLeft, Dot, Play } from 'lucide-react'
 import Markdown from 'react-markdown'
 import remarkMath from 'remark-math'
 import rehypeHighlight from 'rehype-highlight'
 import remarkGfm from 'remark-gfm'
 import rehypeKatex from 'rehype-katex'
 import Image from 'next/image'
+import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from '@/components/ui/tooltip'
 
 const View = dynamic(() => import('@/components/canvas/View').then((mod) => mod.View), {
   ssr: false,
@@ -149,10 +150,26 @@ export default function Page() {
         <Controls zoom={zoom} focus={focus} />
       </View>
       <div className='shadow-md absolute bottom-1/4 right-4 md:bottom-24 md:right-24 rounded-lg border p-4 z-10 bg-[#faf0e6] dark:bg-card max-w-[60%] w-[400px] flex flex-col gap-4 max-h-[50%] overflow-y-hidden '>
+        <Tooltip>
+          <TooltipTrigger asChild>
+            <div className='z-20 absolute left-1/2 transform -translate-x-1/2 bottom-[5.5rem] '>
+              <Button
+                variant='generate'
+                className={'z-50 generate-button whitespace-nowrap text-center outline-none transition-all'}
+              >
+                <div className={'rounded-full border border-inpug bg-background p-4  tracking-wider outline-none '}>
+                  <Play className='size-4' />
+                </div>
+              </Button>
+            </div>
+          </TooltipTrigger>
+          <TooltipContent>Play 3D</TooltipContent>
+        </Tooltip>
+
         <div>
           <div
             ref={markdownContainerRef}
-            className='bg-popover h-[300px] shadow-inner overflow-y-auto overflow-x-hidden border rounded-lg p-4'
+            className='bg-popover h-[300px] shadow-inner overflow-y-auto overflow-x-hidden border rounded-lg p-4 relative z-0'
           >
             <div className='relative'>
               <div className='absolute bg-white/[7.5%] -top-4  -left-[16px] h-[110%] w-[50px]' />
@@ -172,6 +189,7 @@ export default function Page() {
               </Markdown>
             </div>
           </div>
+
           <div className='flex w-full justify-center gap-4 pt-4 items-center'>
             <Button
               variant='outline'
@@ -232,9 +250,11 @@ export default function Page() {
           >
             Back
           </Button>
+
           <Button
             className='w-[80%]'
             size='sm'
+            disabled={markdownIdx < CHECKPOINTS[currentPosition % CHECKPOINTS.length].markdown.length - 1}
             onClick={() => {
               setFocus(new THREE.Vector3(...CHECKPOINTS[(currentPosition + 1) % CHECKPOINTS.length].position))
               setCurrentPosition((prev) => prev + 1)
