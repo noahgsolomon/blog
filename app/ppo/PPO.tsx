@@ -7,15 +7,15 @@ export default function PPO() {
   const theme = useTheme().resolvedTheme
   return (
     <>
-      <mesh position={[0, 0, 0]}>
+      <mesh position={[-10, 0, 0]}>
         <meshStandardMaterial />
         <boxGeometry />
       </mesh>
-      <mesh position={[2, 0, 0]}>
+      <mesh position={[90, 0, 0]}>
         <meshStandardMaterial />
         <boxGeometry />
       </mesh>
-      <mesh position={[-2, 0, 0]}>
+      <mesh position={[190, 0, 0]}>
         <meshStandardMaterial />
         <boxGeometry />
       </mesh>

@@ -28,13 +28,17 @@ const View = dynamic(() => import('@/components/canvas/View').then((mod) => mod.
 
 CameraControls.install({ THREE: THREE })
 
-function Controls({ zoom, focus, pos = new THREE.Vector3(), look = new THREE.Vector3() }) {
+function Controls({ zoom, focus, pos = new THREE.Vector3(), look = new THREE.Vector3(), chapterNumber }) {
+  console.log('sup')
+  const lookOffset = useMemo(() => structuredClone(look), [chapterNumber])
   const camera = useThree((state) => state.camera)
   const gl = useThree((state) => state.gl)
   const controls = useMemo(() => new CameraControls(camera, gl.domElement), [])
   return useFrame((state, delta) => {
     zoom ? pos.set(focus.x, focus.y, focus.z + 2) : pos.set(0, 0, 5)
-    zoom ? look.set(focus.x, focus.y, focus.z - 2) : look.set(0, 0, 4)
+    const targetLook = zoom
+      ? new THREE.Vector3(focus.x + lookOffset.x, focus.y + lookOffset.y, focus.z - 2 + lookOffset.z)
+      : new THREE.Vector3(0, 0, 4)
 
     state.camera.position.lerp(pos, 0.5)
     state.camera.updateProjectionMatrix()
@@ -43,21 +47,20 @@ function Controls({ zoom, focus, pos = new THREE.Vector3(), look = new THREE.Vec
       state.camera.position.x,
       state.camera.position.y,
       state.camera.position.z,
-      look.x,
-      look.y,
-      look.z,
+      targetLook.x,
+      targetLook.y,
+      targetLook.z,
       true,
     )
     return controls.update(delta)
   })
 }
 
-const CHAPTERS = [{ chapter: 1, title: '', checkpointIdx: 0 }]
-
 const CHECKPOINTS = [
   {
     chapterName: 'Intro to RL',
-    position: [-2, 0, 0],
+    position: [-10, 2, 2],
+    look: [0, -2, 0],
     markdown: [
       `## Reinforcement Learning
 <br></br>
@@ -100,7 +103,8 @@ Note, we ourselves need to come up with some reward function, which is what we w
   },
   {
     chapterName: 'Intro to RL 2',
-    position: [0, 0, 0],
+    position: [90, 0, 0],
+    look: [0, 0, 0],
     markdown: [
       `### The essence
 <br></br>
@@ -114,7 +118,8 @@ This trajectory forms an episode, and can either end by reaching a terminal stat
   },
   {
     chapterName: 'Intro to RL 3',
-    position: [2, 0, 0],
+    position: [190, 0, 0],
+    look: [0, 0, 0],
     markdown: [
       `
 `,
@@ -126,7 +131,13 @@ export default function Page() {
   const [isMounted, setIsMounted] = useState(false)
   const [zoom, setZoom] = useState(false)
   const [focus, setFocus] = useState({})
+  const [look, setLook] = useState({})
   const [currentPosition, setCurrentPosition] = useState(0)
+
+  useEffect(() => {
+    console.log(look)
+  }, [look])
+
   const [markdownIdx, setMarkdownIdx] = useState(0)
 
   const markdownContainerRef = useRef(null)
@@ -134,6 +145,7 @@ export default function Page() {
   useEffect(() => {
     setZoom(true)
     setFocus(new THREE.Vector3(...CHECKPOINTS[0].position))
+    setLook(new THREE.Vector3(...CHECKPOINTS[0].look))
     setIsMounted(true)
   }, [])
 
@@ -147,12 +159,12 @@ export default function Page() {
         <PPO />
         <Lights />
         <OrbitControls />
-        <Controls zoom={zoom} focus={focus} />
+        <Controls look={look} zoom={zoom} focus={focus} chapterNumber={currentPosition % CHECKPOINTS.length} />
       </View>
-      <div className='shadow-md absolute bottom-1/4 right-4 md:bottom-24 md:right-24 rounded-lg border p-4 z-10 bg-[#faf0e6] dark:bg-card max-w-[60%] w-[400px] flex flex-col gap-4 max-h-[50%] overflow-y-hidden '>
+      <div className='shadow-md absolute bottom-4 right-4 md:bottom-24 md:right-24 rounded-lg border p-4 z-10 bg-card max-w-[60%] w-[400px] flex flex-col gap-4 max-h-[50%] overflow-y-hidden '>
         <Tooltip>
           <TooltipTrigger asChild>
-            <div className='z-20 absolute left-1/2 transform -translate-x-1/2 bottom-[5.5rem] '>
+            <div className='z-20 absolute left-1/2 transform -translate-x-1/2 bottom-[5.2rem] '>
               <Button
                 variant='generate'
                 className={'z-50 generate-button whitespace-nowrap text-center outline-none transition-all'}
@@ -243,6 +255,8 @@ export default function Page() {
             className='w-[20%]'
             onClick={() => {
               setFocus(new THREE.Vector3(...CHECKPOINTS[(currentPosition - 1) % CHECKPOINTS.length].position))
+              setLook(new THREE.Vector3(...CHECKPOINTS[(currentPosition - 1) % CHECKPOINTS.length].look))
+
               setCurrentPosition((prev) => prev - 1)
               setMarkdownIdx(0)
               markdownContainerRef.current?.firstElementChild?.scrollIntoView()
@@ -257,6 +271,8 @@ export default function Page() {
             disabled={markdownIdx < CHECKPOINTS[currentPosition % CHECKPOINTS.length].markdown.length - 1}
             onClick={() => {
               setFocus(new THREE.Vector3(...CHECKPOINTS[(currentPosition + 1) % CHECKPOINTS.length].position))
+              setLook(new THREE.Vector3(...CHECKPOINTS[(currentPosition + 1) % CHECKPOINTS.length].look))
+
               setCurrentPosition((prev) => prev + 1)
               setMarkdownIdx(0)
               markdownContainerRef.current?.firstElementChild?.scrollIntoView()
@@ -270,8 +286,11 @@ export default function Page() {
         <ChevronLeft className='size-4' />
       </Link>
       <ThemeButton className='absolute top-4 right-4' />
+      <h1 className='text-2xl absolute top-12 left-1/2 transform -translate-x-1/2 font-bold'>
+        {currentPosition % CHECKPOINTS.length}. {CHECKPOINTS[currentPosition % CHECKPOINTS.length].chapterName}
+      </h1>
       <Accordion
-        className='shadow-md bg-card rounded-lg transition-all cursor-pointer z-20 absolute bottom-4 left-4'
+        className='hidden md:block shadow-md bg-card rounded-lg transition-all cursor-pointer z-20 absolute bottom-4 left-4'
         type='single'
         collapsible
       >
@@ -291,6 +310,7 @@ export default function Page() {
               <AccordionItem
                 onClick={() => {
                   setFocus(new THREE.Vector3(...CHECKPOINTS[index % CHECKPOINTS.length].position))
+                  setLook(new THREE.Vector3(...CHECKPOINTS[index % CHECKPOINTS.length].look))
                   setCurrentPosition(index)
                   setMarkdownIdx(0)
                 }}
