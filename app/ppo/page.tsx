@@ -158,7 +158,7 @@ export default function Page() {
                 className={'z-50 generate-button whitespace-nowrap text-center outline-none transition-all'}
               >
                 <div className={'rounded-full border border-inpug bg-background p-4  tracking-wider outline-none '}>
-                  <Play className='size-4' />
+                  <Play className='size-4 text-primary' />
                 </div>
               </Button>
             </div>
