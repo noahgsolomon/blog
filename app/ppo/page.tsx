@@ -131,12 +131,8 @@ export default function Page() {
   const [isMounted, setIsMounted] = useState(false)
   const [zoom, setZoom] = useState(false)
   const [focus, setFocus] = useState({})
-  const [look, setLook] = useState({})
+  const [look, setLook] = useState(new THREE.Vector3())
   const [currentPosition, setCurrentPosition] = useState(0)
-
-  useEffect(() => {
-    console.log(look)
-  }, [look])
 
   const [markdownIdx, setMarkdownIdx] = useState(0)
 
