@@ -2,23 +2,27 @@
 
 import { Grid } from '@react-three/drei'
 import { useTheme } from 'next-themes'
+import ChapterOne from './ChapterOne'
 
 export default function PPO() {
   const theme = useTheme().resolvedTheme
   return (
     <>
-      <mesh position={[-10, 0, 0]}>
-        <meshStandardMaterial />
-        <boxGeometry />
-      </mesh>
-      <mesh position={[90, 0, 0]}>
-        <meshStandardMaterial />
-        <boxGeometry />
-      </mesh>
-      <mesh position={[190, 0, 0]}>
-        <meshStandardMaterial />
-        <boxGeometry />
-      </mesh>
+      <ChapterOne />
+
+      <group position={[90, 0, 0]}>
+        <mesh>
+          <meshStandardMaterial />
+          <boxGeometry />
+        </mesh>
+      </group>
+      <group position={[190, 0, 0]}>
+        <mesh>
+          <meshStandardMaterial />
+          <boxGeometry />
+        </mesh>
+      </group>
+
       <Grid
         position-y={-2}
         args={[10.5, 10.5]}

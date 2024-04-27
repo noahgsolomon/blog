@@ -13,3 +13,5 @@ train/runs/*
 train/wandb/*
 
 public/sw*
+
+public/models/*

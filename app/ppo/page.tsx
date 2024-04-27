@@ -59,7 +59,7 @@ function Controls({ zoom, focus, pos = new THREE.Vector3(), look = new THREE.Vec
 const CHECKPOINTS = [
   {
     chapterName: 'Intro to RL',
-    position: [-10, 2, 2],
+    position: [-10, 2, 0],
     look: [0, -2, 0],
     markdown: [
       `## Reinforcement Learning
@@ -161,7 +161,7 @@ export default function Page() {
         <OrbitControls />
         <Controls look={look} zoom={zoom} focus={focus} chapterNumber={currentPosition % CHECKPOINTS.length} />
       </View>
-      <div className='shadow-md absolute bottom-4 right-4 md:bottom-24 md:right-24 rounded-lg border p-4 z-10 bg-card max-w-[60%] w-[400px] flex flex-col gap-4 max-h-[50%] overflow-y-hidden '>
+      <div className='flex shadow-md absolute bottom-4 right-4 md:bottom-24 md:right-24 rounded-lg border p-4 z-10 bg-card max-w-[60%] w-[400px] flex-col gap-4 max-h-[50%] overflow-y-hidden '>
         <Tooltip>
           <TooltipTrigger asChild>
             <div className='z-20 absolute left-1/2 transform -translate-x-1/2 bottom-[5.2rem] '>
@@ -169,7 +169,7 @@ export default function Page() {
                 variant='generate'
                 className={'z-50 generate-button whitespace-nowrap text-center outline-none transition-all'}
               >
-                <div className={'rounded-full border border-inpug bg-background p-4  tracking-wider outline-none '}>
+                <div className={'rounded-full border border-input bg-background p-4  tracking-wider outline-none '}>
                   <Play className='size-4 text-primary' />
                 </div>
               </Button>
