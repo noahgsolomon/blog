@@ -1,7 +1,10 @@
 'use client'
 
-import { RoundedBox, useHelper } from '@react-three/drei'
+import { Button } from '@/components/ui/button'
+import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from '@/components/ui/tooltip'
+import { Html, RoundedBox, Text3D, useHelper } from '@react-three/drei'
 import { DirectionalLightHelperProps } from '@react-three/fiber'
+import { Play } from 'lucide-react'
 import { useTheme } from 'next-themes'
 import { useRef, useState } from 'react'
 import { DirectionalLightHelper } from 'three'
@@ -36,6 +39,7 @@ export default function ChapterOne() {
   return (
     <>
       <group position={[-10, 0, 0]}>{tiles({ theme })}</group>
+
       <directionalLight
         /*@ts-ignore */
         castShadow

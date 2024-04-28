@@ -1,6 +1,6 @@
 'use client'
 
-import { OrbitControls, PerspectiveCamera, PresentationControls } from '@react-three/drei'
+import { Html, OrbitControls, PerspectiveCamera, PresentationControls } from '@react-three/drei'
 import dynamic from 'next/dynamic'
 import { Fragment, useEffect, useMemo, useRef, useState } from 'react'
 import Lights from '@/Lights'
@@ -67,13 +67,14 @@ const CHECKPOINTS = [
 RL is a class of algorithms in Machine learning which can learn to navigate an environment in such a way to maximize a cumulative reward. By initially making random actions in an environment, and being informed of the quality of the action chosen, the agent is able to iteratively approach more optimal generalizations about this environment.
 <br></br>
 A valuable aspect of RL is that we do not even need to understand what the optimal solution will be which maximizes the reward. All that is needed for learning to take place is an environment, a way to observe that environment, and a reward signal which determines the value of any state. For this reason, one particularly important and challenging aspect of RL is how to model the environment states, and what reward we should assign to those states.
-`,
-      `## Why do we even need this RL stuff? 
+<br></br>
+## Why do we even need this RL stuff? 
 <br></br>
 Can't we just pre-compute the most optimal action to take for any given state? The problem is the scale of possible states to experience and actions to choose from. As an example, if we take an atari screen's pixels as input to learn to play some game, where the size of the screen is 160x192 pixels in grayscale, each pixel would be able to take on 256 different values. 
 <br></br> 
-There being $160 \\times 192$ different pixels, the total number of states this policy function could receive as input would be $256^{(160 \\times 192)}$. (Costa Huang dissertation) For context, there are $10^{80}$ atoms in the known universe, so this problem is computationally infeasible to pre-compute a state-to-action mapping table.`,
-      `### The essence
+There being $160 \\times 192$ different pixels, the total number of states this policy function could receive as input would be $256^{(160 \\times 192)}$. (Costa Huang dissertation) For context, there are $10^{80}$ atoms in the known universe, so this problem is computationally infeasible to pre-compute a state-to-action mapping table.
+<br></br>
+### The essence
 <br></br>
 The essence of RL is to learn some function approximation called the policy, denoted as $\\pi$, which takes in as input the state $s$ of the agent in the environment and outputs an action $a$ to take to move us from the current state to a new state.
 <br></br>
@@ -150,52 +151,38 @@ export default function Page() {
   }
 
   return (
-    <div className='w-screen h-screen overflow-hidden'>
-      <View className=' touch-none w-full h-full '>
-        <PPO />
-        <Lights />
-        <OrbitControls />
-        <Controls look={look} zoom={zoom} focus={focus} chapterNumber={currentPosition % CHECKPOINTS.length} />
-      </View>
-      <div className='flex shadow-md absolute bottom-4 right-4 md:bottom-24 md:right-24 rounded-lg border p-4 z-10 bg-card max-w-[60%] w-[400px] flex-col gap-4 max-h-[50%] overflow-y-hidden '>
-        <Tooltip>
-          <TooltipTrigger asChild>
-            <div className='z-20 absolute left-1/2 transform -translate-x-1/2 bottom-[5.2rem] '>
-              <Button
-                variant='generate'
-                className={'z-50 generate-button whitespace-nowrap text-center outline-none transition-all'}
-              >
-                <div className={'rounded-full border border-input bg-background p-4  tracking-wider outline-none '}>
-                  <Play className='size-4 text-primary' />
-                </div>
-              </Button>
-            </div>
-          </TooltipTrigger>
-          <TooltipContent>Play 3D</TooltipContent>
-        </Tooltip>
+    <div className='w-screen h-screen overflow-hidden flex flex-row'>
+      <div className='w-[60%] relative'>
+        <View className=' touch-none w-full h-full '>
+          <PPO />
+          <Lights />
+          <OrbitControls />
+          <Controls look={look} zoom={zoom} focus={focus} chapterNumber={currentPosition % CHECKPOINTS.length} />
+        </View>
+        <ThemeButton className='absolute top-4 right-4' />
+      </div>
 
-        <div>
+      <div className='flex border-l shadow-md p-4 z-10 bg-card w-[40%] flex-col gap-4 h-full overflow-y-hidden'>
+        <div className='flex flex-col justify-between h-full'>
           <div
             ref={markdownContainerRef}
-            className='bg-popover h-[300px] shadow-inner overflow-y-auto overflow-x-hidden border rounded-lg p-4 relative z-0'
+            className='bg-popover h-[750px] shadow-inner overflow-y-auto overflow-x-hidden border rounded-lg p-4 relative z-0'
           >
-            <div className='relative'>
-              <div className='absolute bg-white/[7.5%] -top-4  -left-[16px] h-[110%] w-[50px]' />
-              <div className='absolute bg-[#f9fb00]/[7.5%] -top-4  left-[34px] h-[110%] w-[50px]' />
-              <div className='absolute bg-[#02feff]/[7.5%]  -top-4  left-[84px] h-[110%] w-[50px]' />
-              <div className='absolute bg-[#01ff00]/[7.5%] -top-4  left-[134px] h-[110%] w-[50px]' />
-              <div className='absolute bg-[#fd00fb]/[7.5%]  -top-4  left-[184px] h-[110%] w-[50px]' />
-              <div className='absolute bg-[#fb0102]/[7.5%]  -top-4  left-[234px] h-[110%] w-[50px]' />
-              <div className='absolute bg-[#0301fc]/[7.5%] -top-4  left-[284px] h-[110%] w-[50px]' />
-              <div className='absolute bg-black/[7.5%] -top-4  left-[334px] h-full w-[50px]' />
-              <Markdown
-                className='z-10 relative'
-                remarkPlugins={[remarkGfm, remarkMath]}
-                rehypePlugins={[rehypeKatex, rehypeHighlight, rehypeRaw]}
-              >
-                {CHECKPOINTS[currentPosition % CHECKPOINTS.length].markdown[markdownIdx]}
-              </Markdown>
-            </div>
+            {/* <div className='absolute bg-white/[7.5%] -top-4  -left-[16px] h-[110%] w-[50px]' />
+            <div className='absolute bg-[#f9fb00]/[7.5%] -top-4  left-[34px] h-[110%] w-[50px]' />
+            <div className='absolute bg-[#02feff]/[7.5%]  -top-4  left-[84px] h-[110%] w-[50px]' />
+            <div className='absolute bg-[#01ff00]/[7.5%] -top-4  left-[134px] h-[110%] w-[50px]' />
+            <div className='absolute bg-[#fd00fb]/[7.5%]  -top-4  left-[184px] h-[110%] w-[50px]' />
+            <div className='absolute bg-[#fb0102]/[7.5%]  -top-4  left-[234px] h-[110%] w-[50px]' />
+            <div className='absolute bg-[#0301fc]/[7.5%] -top-4  left-[284px] h-[110%] w-[50px]' />
+            <div className='absolute bg-black/[7.5%] -top-4  left-[334px] h-full w-[50px]' /> */}
+            <Markdown
+              className='z-10 relative'
+              remarkPlugins={[remarkGfm, remarkMath]}
+              rehypePlugins={[rehypeKatex, rehypeHighlight, rehypeRaw]}
+            >
+              {CHECKPOINTS[currentPosition % CHECKPOINTS.length].markdown[markdownIdx]}
+            </Markdown>
           </div>
 
           <div className='flex w-full justify-center gap-4 pt-4 items-center'>
@@ -281,8 +268,7 @@ export default function Page() {
       <Link className={buttonVariants({ variant: 'outline', className: 'absolute top-4 left-4' })} href={'/'}>
         <ChevronLeft className='size-4' />
       </Link>
-      <ThemeButton className='absolute top-4 right-4' />
-      <h1 className='text-2xl absolute top-12 left-1/2 transform -translate-x-1/2 font-bold'>
+      <h1 className='text-2xl absolute top-12 left-1/3 transform -translate-x-1/2 font-bold'>
         {currentPosition % CHECKPOINTS.length}. {CHECKPOINTS[currentPosition % CHECKPOINTS.length].chapterName}
       </h1>
       <Accordion
