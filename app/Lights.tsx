@@ -16,7 +16,7 @@ export default function Lights() {
         color={'#ffffff'}
       />
       {/*@ts-ignore */}
-      <ambientLight intensity={1.5} />
+      <ambientLight intensity={2.5} />
     </>
   )
 }

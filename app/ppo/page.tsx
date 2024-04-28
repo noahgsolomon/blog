@@ -59,7 +59,7 @@ function Controls({ zoom, focus, pos = new THREE.Vector3(), look = new THREE.Vec
 const CHECKPOINTS = [
   {
     chapterName: 'Intro to RL',
-    position: [-10, 2, 0],
+    position: [-10, 3, 6],
     look: [0, -2, 0],
     markdown: [
       `## Reinforcement Learning
