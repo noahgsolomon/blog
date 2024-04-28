@@ -6,10 +6,9 @@ import { useTheme } from 'next-themes'
 import { useRef, useState } from 'react'
 import { DirectionalLightHelper } from 'three'
 
-const tiles = () => {
+const tiles = ({ theme }: { theme: 'light' | 'dark' }) => {
   const gridSize = 8 // Define the size of one side of the grid
   const tilePositions = []
-  const theme = useTheme().resolvedTheme
 
   for (let i = 0; i < gridSize * gridSize; i++) {
     const x = i % gridSize // Calculates the column position
@@ -33,9 +32,10 @@ const tiles = () => {
 }
 
 export default function ChapterOne() {
+  const theme = useTheme().resolvedTheme as 'light' | 'dark'
   return (
     <>
-      <group position={[-10, 0, 0]}>{tiles()}</group>
+      <group position={[-10, 0, 0]}>{tiles({ theme })}</group>
       <directionalLight
         /*@ts-ignore */
         castShadow
