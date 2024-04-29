@@ -19,12 +19,26 @@ const tiles = ({ theme }: { theme: 'light' | 'dark' }) => {
   return (
     <Float speed={0.25} floatIntensity={0.25} floatingRange={[1, 5]}>
       <group position={[-10, 0, 0]}>
-        {tilePositions.map(({ x, z }) => (
-          <mesh key={`${x}-${z}`} position={[x - gridSize / 2 + 0.5, 0, z - gridSize / 2 + 0.5]}>
-            <boxGeometry args={[0.9, 0.1, 0.9]} />
-            <meshStandardMaterial color={theme === 'dark' ? '#212336' : '#bcc0e3'} />
-          </mesh>
-        ))}
+        {tilePositions.map(({ x, z }) => {
+          const isOdd = (x + z) % 2 === 1
+          const isGold = x === 1 && z === 1
+
+          let color
+          if (isGold) {
+            color = 'gold'
+          } else if (theme === 'dark') {
+            color = isOdd ? '#212336' : '#212336'
+          } else {
+            color = isOdd ? '#bcc0e3' : '#bcc0e3'
+          }
+
+          return (
+            <mesh key={`${x}-${z}`} position={[x - gridSize / 2 + 0.5, 0, z - gridSize / 2 + 0.5]}>
+              <boxGeometry args={[0.9, 0.1, 0.9]} />
+              <meshStandardMaterial color={color} />
+            </mesh>
+          )
+        })}
         <Html position={[0, 1, 0]} distanceFactor={10}>
           <TooltipProvider delayDuration={0}>
             <Tooltip>

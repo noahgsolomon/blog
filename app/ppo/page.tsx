@@ -58,7 +58,7 @@ function Controls({ zoom, focus, pos = new THREE.Vector3(), look = new THREE.Vec
 const CHECKPOINTS = [
   {
     chapterName: 'Intro to RL',
-    position: [-10, 3, 7],
+    position: [-10, 4, 5],
     look: [0, -2, 0],
     markdown: [
       `## Reinforcement Learning
@@ -150,8 +150,8 @@ export default function Page() {
   }
 
   return (
-    <div className='w-screen h-screen overflow-hidden flex flex-row'>
-      <div className='w-[60%] relative'>
+    <div className='w-screen h-screen overflow-hidden flex flex-col lg:flex-row'>
+      <div className='w-full lg:w-[60%] lg:h-full h-[50%] relative'>
         <View className=' touch-none w-full h-full '>
           <PPO />
           <Lights />
@@ -161,11 +161,11 @@ export default function Page() {
         <ThemeButton className='absolute top-4 right-4' />
       </div>
 
-      <div className='flex border-l shadow-md p-4 z-10 bg-card w-[40%] flex-col gap-4 h-full overflow-y-hidden'>
-        <div className='flex flex-col justify-between h-full'>
+      <div className='flex border-t lg:border-l shadow-md p-4 z-10 bg-card w-full lg:w-[40%] flex-col gap-4 h-[50%] lg:h-full overflow-y-hidden'>
+        <div className='flex flex-col  h-full'>
           <div
             ref={markdownContainerRef}
-            className='bg-popover h-[750px] shadow-inner overflow-y-auto overflow-x-hidden border rounded-lg p-4 relative z-0'
+            className='bg-popover h-[80%] lg:h-[750px] shadow-inner overflow-y-auto overflow-x-hidden border rounded-lg p-4 relative z-0'
           >
             {/* <div className='absolute bg-white/[7.5%] -top-4  -left-[16px] h-[110%] w-[50px]' />
             <div className='absolute bg-[#f9fb00]/[7.5%] -top-4  left-[34px] h-[110%] w-[50px]' />
@@ -184,94 +184,97 @@ export default function Page() {
             </Markdown>
           </div>
 
-          <div className='flex w-full justify-center gap-4 pt-4 items-center'>
-            <Button
-              variant='outline'
-              size='icon'
-              className='size-6'
-              disabled={markdownIdx <= 0}
-              onClick={() => {
-                setMarkdownIdx((prev) => prev - 1)
-                markdownContainerRef.current?.firstElementChild?.scrollIntoView()
-              }}
-            >
-              <ArrowLeft className='size-4' />
-            </Button>
-            <p className='font-bold text-xl'>
-              {[
-                ...Array.from({ length: CHECKPOINTS[currentPosition % CHECKPOINTS.length].markdown.length }).map(
-                  (_, index) =>
-                    index === markdownIdx ? (
-                      <span key={index} className='text-blue-500'>
-                        .
-                      </span>
-                    ) : index < markdownIdx ? (
-                      <span key={index} className=' text-green-500'>
-                        .
-                      </span>
-                    ) : (
-                      <Fragment key={index}>.</Fragment>
-                    ),
-                ),
-              ]}
-            </p>
-            <Button
-              size='icon'
-              variant='outline'
-              className='size-6'
-              disabled={markdownIdx >= CHECKPOINTS[currentPosition % CHECKPOINTS.length].markdown.length - 1}
-              onClick={() => {
-                setMarkdownIdx((prev) => prev + 1)
-                markdownContainerRef.current?.firstElementChild?.scrollIntoView()
-              }}
-            >
-              <ArrowRight className='size-4' />
-            </Button>
+          <div className='flex flex-col gap-4'>
+            <div className='flex w-full justify-center gap-4 pt-4 items-center'>
+              <Button
+                variant='outline'
+                size='icon'
+                className='size-6'
+                disabled={markdownIdx <= 0}
+                onClick={() => {
+                  setMarkdownIdx((prev) => prev - 1)
+                  markdownContainerRef.current?.firstElementChild?.scrollIntoView()
+                }}
+              >
+                <ArrowLeft className='size-4' />
+              </Button>
+              <p className='font-bold text-xl'>
+                {[
+                  ...Array.from({ length: CHECKPOINTS[currentPosition % CHECKPOINTS.length].markdown.length }).map(
+                    (_, index) =>
+                      index === markdownIdx ? (
+                        <span key={index} className='text-blue-500'>
+                          .
+                        </span>
+                      ) : index < markdownIdx ? (
+                        <span key={index} className=' text-green-500'>
+                          .
+                        </span>
+                      ) : (
+                        <Fragment key={index}>.</Fragment>
+                      ),
+                  ),
+                ]}
+              </p>
+              <Button
+                size='icon'
+                variant='outline'
+                className='size-6'
+                disabled={markdownIdx >= CHECKPOINTS[currentPosition % CHECKPOINTS.length].markdown.length - 1}
+                onClick={() => {
+                  setMarkdownIdx((prev) => prev + 1)
+                  markdownContainerRef.current?.firstElementChild?.scrollIntoView()
+                }}
+              >
+                <ArrowRight className='size-4' />
+              </Button>
+            </div>
+
+            <div className='w-full flex flex-row gap-1'>
+              <Button
+                disabled={currentPosition === 0}
+                size='sm'
+                variant='outline'
+                className='w-[20%]'
+                onClick={() => {
+                  setFocus(new THREE.Vector3(...CHECKPOINTS[(currentPosition - 1) % CHECKPOINTS.length].position))
+                  setLook(new THREE.Vector3(...CHECKPOINTS[(currentPosition - 1) % CHECKPOINTS.length].look))
+
+                  setCurrentPosition((prev) => prev - 1)
+                  setMarkdownIdx(0)
+                  markdownContainerRef.current?.firstElementChild?.scrollIntoView()
+                }}
+              >
+                Back
+              </Button>
+
+              <Button
+                className='w-[80%]'
+                size='sm'
+                disabled={markdownIdx < CHECKPOINTS[currentPosition % CHECKPOINTS.length].markdown.length - 1}
+                onClick={() => {
+                  setFocus(new THREE.Vector3(...CHECKPOINTS[(currentPosition + 1) % CHECKPOINTS.length].position))
+                  setLook(new THREE.Vector3(...CHECKPOINTS[(currentPosition + 1) % CHECKPOINTS.length].look))
+
+                  setCurrentPosition((prev) => prev + 1)
+                  setMarkdownIdx(0)
+                  markdownContainerRef.current?.firstElementChild?.scrollIntoView()
+                }}
+              >
+                Continue
+              </Button>
+            </div>
           </div>
-        </div>
-        <div className='w-full flex flex-row gap-1'>
-          <Button
-            disabled={currentPosition === 0}
-            size='sm'
-            variant='outline'
-            className='w-[20%]'
-            onClick={() => {
-              setFocus(new THREE.Vector3(...CHECKPOINTS[(currentPosition - 1) % CHECKPOINTS.length].position))
-              setLook(new THREE.Vector3(...CHECKPOINTS[(currentPosition - 1) % CHECKPOINTS.length].look))
-
-              setCurrentPosition((prev) => prev - 1)
-              setMarkdownIdx(0)
-              markdownContainerRef.current?.firstElementChild?.scrollIntoView()
-            }}
-          >
-            Back
-          </Button>
-
-          <Button
-            className='w-[80%]'
-            size='sm'
-            disabled={markdownIdx < CHECKPOINTS[currentPosition % CHECKPOINTS.length].markdown.length - 1}
-            onClick={() => {
-              setFocus(new THREE.Vector3(...CHECKPOINTS[(currentPosition + 1) % CHECKPOINTS.length].position))
-              setLook(new THREE.Vector3(...CHECKPOINTS[(currentPosition + 1) % CHECKPOINTS.length].look))
-
-              setCurrentPosition((prev) => prev + 1)
-              setMarkdownIdx(0)
-              markdownContainerRef.current?.firstElementChild?.scrollIntoView()
-            }}
-          >
-            Continue
-          </Button>
         </div>
       </div>
       <Link className={buttonVariants({ variant: 'outline', className: 'absolute top-4 left-4' })} href={'/'}>
         <ChevronLeft className='size-4' />
       </Link>
-      <h1 className='text-2xl absolute top-12 left-1/3 transform -translate-x-1/2 font-bold'>
+      <h1 className='text-2xl absolute top-12 left-1/2 lg:left-1/3 transform -translate-x-1/2 font-bold'>
         {currentPosition % CHECKPOINTS.length}. {CHECKPOINTS[currentPosition % CHECKPOINTS.length].chapterName}
       </h1>
       <Accordion
-        className='hidden md:block shadow-md bg-card rounded-lg transition-all cursor-pointer z-20 absolute bottom-4 left-4'
+        className='hidden lg:block shadow-md bg-card rounded-lg transition-all cursor-pointer z-20 absolute bottom-4 left-4'
         type='single'
         collapsible
       >
