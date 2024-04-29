@@ -151,7 +151,7 @@ export default function Page() {
 
   return (
     <div className='w-screen h-screen overflow-hidden flex flex-col lg:flex-row'>
-      <div className='w-full lg:w-[60%] lg:h-full h-[50%] relative'>
+      <div className='w-full lg:w-[60%] lg:h-full h-[45%] relative'>
         <View className=' touch-none w-full h-full '>
           <PPO />
           <Lights />
@@ -161,8 +161,8 @@ export default function Page() {
         <ThemeButton className='absolute top-4 right-4' />
       </div>
 
-      <div className='flex border-t lg:border-l shadow-md p-4 z-10 bg-card w-full lg:w-[40%] flex-col gap-4 h-[50%] lg:h-full overflow-y-hidden'>
-        <div className='flex flex-col  h-full'>
+      <div className='flex border-t lg:border-l shadow-md p-4 z-10 bg-card w-full lg:w-[40%] flex-col lg:gap-4 h-[55%] lg:h-full overflow-y-hidden'>
+        <div className='flex flex-col h-full'>
           <div
             ref={markdownContainerRef}
             className='bg-popover h-[80%] lg:h-[750px] shadow-inner overflow-y-auto overflow-x-hidden border rounded-lg p-4 relative z-0'
@@ -184,8 +184,8 @@ export default function Page() {
             </Markdown>
           </div>
 
-          <div className='flex flex-col gap-4'>
-            <div className='flex w-full justify-center gap-4 pt-4 items-center'>
+          <div className='flex flex-col gap-1 lg:gap-4'>
+            <div className='flex w-full justify-center gap-4 pt-1 lg:pt-4 items-center'>
               <Button
                 variant='outline'
                 size='icon'
@@ -270,7 +270,7 @@ export default function Page() {
       <Link className={buttonVariants({ variant: 'outline', className: 'absolute top-4 left-4' })} href={'/'}>
         <ChevronLeft className='size-4' />
       </Link>
-      <h1 className='text-2xl absolute z-20 top-12 left-1/2 lg:left-1/3 transform -translate-x-1/2 font-bold'>
+      <h1 className='text-xl lg:text-2xl absolute z-20 top-12 left-1/2 lg:left-1/3 transform -translate-x-1/2 font-bold'>
         {currentPosition % CHECKPOINTS.length}. {CHECKPOINTS[currentPosition % CHECKPOINTS.length].chapterName}
       </h1>
       <Accordion
