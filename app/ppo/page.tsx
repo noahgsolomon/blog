@@ -270,7 +270,7 @@ export default function Page() {
       <Link className={buttonVariants({ variant: 'outline', className: 'absolute top-4 left-4' })} href={'/'}>
         <ChevronLeft className='size-4' />
       </Link>
-      <h1 className='text-2xl absolute top-12 left-1/2 lg:left-1/3 transform -translate-x-1/2 font-bold'>
+      <h1 className='text-2xl absolute z-20 top-12 left-1/2 lg:left-1/3 transform -translate-x-1/2 font-bold'>
         {currentPosition % CHECKPOINTS.length}. {CHECKPOINTS[currentPosition % CHECKPOINTS.length].chapterName}
       </h1>
       <Accordion
