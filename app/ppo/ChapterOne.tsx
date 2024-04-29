@@ -1,13 +1,7 @@
 'use client'
 
-import { Button } from '@/components/ui/button'
-import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from '@/components/ui/tooltip'
-import { Html, RoundedBox, Text3D, useHelper } from '@react-three/drei'
-import { DirectionalLightHelperProps } from '@react-three/fiber'
-import { Play } from 'lucide-react'
+import { Html, RoundedBox } from '@react-three/drei'
 import { useTheme } from 'next-themes'
-import { useRef, useState } from 'react'
-import { DirectionalLightHelper } from 'three'
 
 const tiles = ({ theme }: { theme: 'light' | 'dark' }) => {
   const gridSize = 8 // Define the size of one side of the grid
@@ -20,15 +14,17 @@ const tiles = ({ theme }: { theme: 'light' | 'dark' }) => {
   }
 
   return (
-    <group>
+    <group position={[-10, 0, 0]}>
       {tilePositions.map(({ x, z }) => (
-        <RoundedBox
-          key={`${x}-${z}`}
-          args={[0.9, 0.1, 0.9]}
-          position={[x - gridSize / 2 + 0.5, 0, z - gridSize / 2 + 0.5]}
-        >
+        <mesh key={`${x}-${z}`} position={[x - gridSize / 2 + 0.5, 0, z - gridSize / 2 + 0.5]}>
+          <boxGeometry args={[0.9, 0.1, 0.9]} />
+          {x === 1 && z === 1 && (
+            <Html className='z-50'>
+              <p className='z-50'>SUP</p>
+            </Html>
+          )}
           <meshStandardMaterial color={theme === 'dark' ? '#212336' : '#bcc0e3'} />
-        </RoundedBox>
+        </mesh>
       ))}
     </group>
   )
@@ -38,7 +34,7 @@ export default function ChapterOne() {
   const theme = useTheme().resolvedTheme as 'light' | 'dark'
   return (
     <>
-      <group position={[-10, 0, 0]}>{tiles({ theme })}</group>
+      {tiles({ theme })}
 
       <directionalLight
         /*@ts-ignore */

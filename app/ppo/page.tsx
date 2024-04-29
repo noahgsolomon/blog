@@ -156,7 +156,7 @@ export default function Page() {
         <View className=' touch-none w-full h-full '>
           <PPO />
           <Lights />
-          <OrbitControls />
+          {/* <OrbitControls /> */}
           <Controls look={look} zoom={zoom} focus={focus} chapterNumber={currentPosition % CHECKPOINTS.length} />
         </View>
         <ThemeButton className='absolute top-4 right-4' />
