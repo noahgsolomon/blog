@@ -12,6 +12,10 @@ module.exports = {
       },
     },
     extend: {
+      screens: {
+        coarse: { raw: '(pointer: coarse)' },
+        fine: { raw: '(pointer: fine)' },
+      },
       fontFamily: {
         krypton: ['Krypton', 'sans-serif'],
       },

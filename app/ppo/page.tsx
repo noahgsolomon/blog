@@ -150,7 +150,7 @@ export default function Page() {
   }
 
   return (
-    <div className='w-screen h-[90vh] sm:h-screen overflow-hidden flex flex-col lg:flex-row'>
+    <div className='w-screen h-[90vh] fine:h-screen overflow-hidden flex flex-col lg:flex-row'>
       <div className='w-full lg:w-[60%] lg:h-full h-[45%] relative'>
         <View className=' touch-none w-full h-full '>
           <PPO />
