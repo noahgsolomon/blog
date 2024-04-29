@@ -58,7 +58,7 @@ function Controls({ zoom, focus, pos = new THREE.Vector3(), look = new THREE.Vec
 const CHECKPOINTS = [
   {
     chapterName: 'Intro to RL',
-    position: [-10, 3, 6],
+    position: [-10, 3, 7],
     look: [0, -2, 0],
     markdown: [
       `## Reinforcement Learning
@@ -102,7 +102,7 @@ Note, we ourselves need to come up with some reward function, which is what we w
     ],
   },
   {
-    chapterName: 'Intro to RL 2',
+    chapterName: 'Q Learning',
     position: [90, 0, 0],
     look: [0, 0, 0],
     markdown: [
@@ -117,7 +117,7 @@ This trajectory forms an episode, and can either end by reaching a terminal stat
     ],
   },
   {
-    chapterName: 'Intro to RL 3',
+    chapterName: 'Deep Q Learning (DQN)',
     position: [190, 0, 0],
     look: [0, 0, 0],
     markdown: [

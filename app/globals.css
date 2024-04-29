@@ -238,28 +238,28 @@ li {
   --coord-y: 0;
   --coord-x: 0;
 
-  --color-red: color(display-p3 0.95 0.06 0.02 / var(--button-bg-opacity));
-  --color-orange: color(display-p3 0.97 0.61 0.07 / var(--button-bg-opacity));
-  --color-olive: color(display-p3 0.83 0.87 0.04 / var(--button-bg-opacity));
-  --color-lime: color(display-p3 0.31 0.89 0.05 / var(--button-bg-opacity));
-  --color-teal: color(display-p3 0.12 0.88 0.88 / var(--button-bg-opacity));
-  --color-tealer: color(display-p3 0.15 0.8 0.93 / var(--button-bg-opacity));
-  --color-blue: color(display-p3 0.14 0.47 0.99 / var(--button-bg-opacity));
-  --color-purple: color(display-p3 0.38 0.14 0.99 / var(--button-bg-opacity));
-  --color-purpler: color(display-p3 0.73 0.04 0.94 / var(--button-bg-opacity));
-  --color-pink: color(display-p3 0.93 0.03 0.85 / var(--button-bg-opacity));
+  --color-red: color(display-p3 0.95 0.06 0.02 / 0.3);
+  --color-orange: color(display-p3 0.97 0.61 0.07 / 0.3);
+  --color-olive: color(display-p3 0.83 0.87 0.04 / 0.3);
+  --color-lime: color(display-p3 0.31 0.89 0.05 / 0.3);
+  --color-teal: color(display-p3 0.12 0.88 0.88 / 0.3);
+  --color-tealer: color(display-p3 0.15 0.8 0.93 / 0.3);
+  --color-blue: color(display-p3 0.14 0.47 0.99 / 0.3);
+  --color-purple: color(display-p3 0.38 0.14 0.99 / 0.3);
+  --color-purpler: color(display-p3 0.73 0.04 0.94 / 0.3);
+  --color-pink: color(display-p3 0.93 0.03 0.85 / 0.3);
 
   @supports not (color: color(display-p3 0.93 0.03 0.85)) {
-    --color-red: hsl(3 93% 48% / var(--button-bg-opacity));
-    --color-orange: hsl(26 91% 52% / var(--button-bg-opacity));
-    --color-olive: hsl(65 89% 46% / var(--button-bg-opacity));
-    --color-lime: hsl(122 86% 48% / var(--button-bg-opacity));
-    --color-teal: hsl(181 78% 50% / var(--button-bg-opacity));
-    --color-tealer: hsl(193 76% 53% / var(--button-bg-opacity));
-    --color-blue: hsl(219 95% 56% / var(--button-bg-opacity));
-    --color-purple: hsl(269 95% 56% / var(--button-bg-opacity));
-    --color-purpler: hsl(292 93% 47% / var(--button-bg-opacity));
-    --color-pink: hsl(327 96% 47% / var(--button-bg-opacity));
+    --color-red: hsl(3 80% 48% / 0.3);
+    --color-orange: hsl(26 80% 52% / 0.3);
+    --color-olive: hsl(65 80% 46% / 0.3);
+    --color-lime: hsl(122 80% 48% / 0.3);
+    --color-teal: hsl(181 70% 50% / 0.3);
+    --color-tealer: hsl(193 70% 53% / 0.3);
+    --color-blue: hsl(219 80% 56% / 0.3);
+    --color-purple: hsl(269 80% 56% / 0.3);
+    --color-purpler: hsl(292 80% 47% / 0.3);
+    --color-pink: hsl(327 80% 47% / 0.3);
   }
 
   cursor: pointer;
@@ -350,42 +350,32 @@ li {
     --button-shadow-opacity: 16;
     --button-shadow-spread: 16;
     --button-after-opacity: 0.7;
-    --button-bg-opacity: 0.15;
-
-    &:active {
-      --button-shadow-opacity: 26;
-      --button-shadow-spread: 26;
-      --button-after-opacity: 0.9;
-      --button-bg-opacity: 0.25;
-      transform: scale(0.98);
-      transition: var(--transitions),
-        transform 0.2s ease-in-out;
-    }
-
+    opacity: 0.8;
     transform: scale(1.02);
     transition: var(--transitions),
-    transform 0.2s ease-in-out;
+      transform 0.2s ease-in-out;
+  }
+
+  &:active {
+    transform: scale(0.98);
   }
 
   &:not(:hover) {
-    --button-shadow-opacity: 0;
-    --button-shadow-spread: 0;
-    --coord-y: 0;
-    --coord-x: 0;
-    --button-bg-opacity: 0;
-    transform: scale(1);
-    transition: var(--transitions), transform 0.2s ease-in-out;
+    --button-shadow-opacity: 16;
+    --button-shadow-spread: 16;
+    --button-after-opacity: 0.7;
+
+    transition: var(--transitions),
+      transform 0.2s ease-in-out;
   }
 }
 
 [data-theme="dark"] .generate-button {
   &:hover {
-    --button-after-opacity: 0.5;
-    --button-bg-opacity: 0.18;
+    --button-after-opacity: 0.75;
 
     &:active {
-      --button-after-opacity: 0.75;
-      --button-bg-opacity: 0.22;
+      --button-after-opacity: 0.9;
     }
   }
 
