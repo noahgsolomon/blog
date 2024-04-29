@@ -29,7 +29,6 @@ const View = dynamic(() => import('@/components/canvas/View').then((mod) => mod.
 CameraControls.install({ THREE: THREE })
 
 function Controls({ zoom, focus, pos = new THREE.Vector3(), look = new THREE.Vector3(), chapterNumber }) {
-  console.log('sup')
   const lookOffset = useMemo(() => structuredClone(look), [chapterNumber])
   const camera = useThree((state) => state.camera)
   const gl = useThree((state) => state.gl)
