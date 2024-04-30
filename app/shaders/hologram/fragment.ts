@@ -29,7 +29,7 @@ void main()
     holographic *= falloff;
 
     // Final color
-    gl_FragColor = vec4(uColor, holographic);
+    gl_FragColor = vec4(uColor, holographic * 2.0);
     #include <tonemapping_fragment>
     #include <colorspace_fragment>
 }
