@@ -1,27 +1,23 @@
 'use client'
-
 import { Cow } from '@/Models/Cow'
 import { Button } from '@/components/ui/button'
-import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from '@/components/ui/tooltip'
-import { Float, Html, useHelper } from '@react-three/drei'
+import { Html, useHelper } from '@react-three/drei'
 import { Play } from 'lucide-react'
 import { useTheme } from 'next-themes'
 import { useEffect, useRef, useState } from 'react'
 import { DirectionalLightHelper } from 'three'
 
-const tiles = ({ theme }: { theme: 'light' | 'dark' }) => {
+const Tiles = ({ theme }: { theme: 'light' | 'dark' }) => {
   const gridSize = 8 // Define the size of one side of the grid
   const tilePositions = []
-
   for (let i = 0; i < gridSize * gridSize; i++) {
     const x = i % gridSize // Calculates the column position
     const z = Math.floor(i / gridSize) // Calculates the row position
     tilePositions.push({ x, z })
   }
 
-  // const lightRef = useRef()
-
-  // useHelper(lightRef, DirectionalLightHelper, 3, 'red')
+  // const lightRef = useRef();
+  // useHelper(lightRef, DirectionalLightHelper, 3, 'red');
 
   const [target, setTarget] = useState()
   const gridRef = useRef()
@@ -39,7 +35,6 @@ const tiles = ({ theme }: { theme: 'light' | 'dark' }) => {
         {tilePositions.map(({ x, z }) => {
           const isOdd = (x + z) % 2 === 1
           const isGold = x === 1 && z === 1
-
           let color
           if (isGold) {
             color = 'gold'
@@ -51,7 +46,7 @@ const tiles = ({ theme }: { theme: 'light' | 'dark' }) => {
 
           return (
             <>
-              {/*@ts-ignore */}
+              {/*@ts-ignore*/}
               <mesh receiveShadow key={`${x}-${z}`} position={[x - gridSize / 2 + 0.5, 0, z - gridSize / 2 + 0.5]}>
                 <boxGeometry args={[0.9, 0.1, 0.9]} />
                 <meshStandardMaterial receiveShadow color={color} />
@@ -66,7 +61,7 @@ const tiles = ({ theme }: { theme: 'light' | 'dark' }) => {
                       >
                         <div
                           className={
-                            'border border-input bg-secondary p-1  tracking-wider outline-none text-xs text-primary'
+                            'border border-input bg-secondary p-1 tracking-wider outline-none text-xs text-primary'
                           }
                         >
                           Play
@@ -83,9 +78,9 @@ const tiles = ({ theme }: { theme: 'light' | 'dark' }) => {
       {/* </Float> */}
       <directionalLight
         // ref={lightRef}
-        /*@ts-ignore */
+        /*@ts-ignore*/
         target={target}
-        /*@ts-ignore */
+        /*@ts-ignore*/
         castShadow
         intensity={5}
         position={[-10, 10, 5]}
@@ -104,6 +99,5 @@ const tiles = ({ theme }: { theme: 'light' | 'dark' }) => {
 
 export default function ChapterOne() {
   const theme = useTheme().resolvedTheme as 'light' | 'dark'
-
-  return <>{tiles({ theme })}</>
+  return <Tiles theme={theme} />
 }
