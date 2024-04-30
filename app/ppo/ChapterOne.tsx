@@ -52,10 +52,7 @@ export default function ChapterOne() {
               {/*@ts-ignore*/}
               <mesh receiveShadow key={`${x}-${z}`} position={[x - gridSize / 2 + 0.5, 0, z - gridSize / 2 + 0.5]}>
                 <boxGeometry args={[0.9, 0.1, 0.9]} />
-                <meshStandardMaterial
-                  receiveShadow
-                  color={isGold ? 'gold' : theme === 'dark' ? '#212336' : '#bcc0e3'}
-                />
+                <meshStandardMaterial color={isGold ? 'gold' : theme === 'dark' ? '#212336' : '#bcc0e3'} />
                 {isGold && currentPlayPosition === 1 ? (
                   <PlayCard
                     castShadow
