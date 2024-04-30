@@ -1,10 +1,13 @@
 'use client'
 
+import { Cow } from '@/Models/Cow'
 import { Button } from '@/components/ui/button'
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from '@/components/ui/tooltip'
-import { Float, Html, RoundedBox } from '@react-three/drei'
+import { Float, Html, useHelper } from '@react-three/drei'
 import { Play } from 'lucide-react'
 import { useTheme } from 'next-themes'
+import { useEffect, useRef, useState } from 'react'
+import { DirectionalLightHelper } from 'three'
 
 const tiles = ({ theme }: { theme: 'light' | 'dark' }) => {
   const gridSize = 8 // Define the size of one side of the grid
@@ -16,9 +19,23 @@ const tiles = ({ theme }: { theme: 'light' | 'dark' }) => {
     tilePositions.push({ x, z })
   }
 
+  // const lightRef = useRef()
+
+  // useHelper(lightRef, DirectionalLightHelper, 3, 'red')
+
+  const [target, setTarget] = useState()
+  const gridRef = useRef()
+
+  useEffect(() => {
+    if (gridRef.current) {
+      setTarget(gridRef.current)
+    }
+  }, [gridRef])
+
   return (
-    <Float speed={0.25} floatIntensity={0.25} floatingRange={[1, 5]}>
-      <group position={[-10, 0, 0]}>
+    <>
+      {/* <Float speed={0.1} floatIntensity={0.1} floatingRange={[1, 2]}> */}
+      <group ref={gridRef} position={[-10, 0, 0]}>
         {tilePositions.map(({ x, z }) => {
           const isOdd = (x + z) % 2 === 1
           const isGold = x === 1 && z === 1
@@ -33,45 +50,45 @@ const tiles = ({ theme }: { theme: 'light' | 'dark' }) => {
           }
 
           return (
-            <mesh key={`${x}-${z}`} position={[x - gridSize / 2 + 0.5, 0, z - gridSize / 2 + 0.5]}>
-              <boxGeometry args={[0.9, 0.1, 0.9]} />
-              <meshStandardMaterial color={color} />
-            </mesh>
+            <>
+              {/*@ts-ignore */}
+              <mesh receiveShadow key={`${x}-${z}`} position={[x - gridSize / 2 + 0.5, 0, z - gridSize / 2 + 0.5]}>
+                <boxGeometry args={[0.9, 0.1, 0.9]} />
+                <meshStandardMaterial receiveShadow color={color} />
+                {x === 4 && z === 7 ? (
+                  <>
+                    <Cow position-y={0.1} rotation-y={-0.25 * Math.PI} scale={0.05} />
+                    <Html castShadow position={[0, 1, 0]} distanceFactor={10}>
+                      <Button
+                        variant='generate'
+                        size='sm'
+                        className={'generate-button whitespace-nowrap text-center outline-none transition-all'}
+                      >
+                        <div
+                          className={
+                            'border border-input bg-secondary p-1  tracking-wider outline-none text-xs text-primary'
+                          }
+                        >
+                          Play
+                        </div>
+                      </Button>
+                    </Html>
+                  </>
+                ) : null}
+              </mesh>
+            </>
           )
         })}
-        <Html position={[0, 1, 0]} distanceFactor={10}>
-          <TooltipProvider delayDuration={0}>
-            <Tooltip>
-              <TooltipTrigger asChild>
-                <Button
-                  variant='generate'
-                  className={'generate-button whitespace-nowrap text-center outline-none transition-all'}
-                >
-                  <div className={'rounded-full border border-input bg-secondary p-4  tracking-wider outline-none '}>
-                    <Play className='fill-primary size-4 text-primary' />
-                  </div>
-                </Button>
-              </TooltipTrigger>
-              <TooltipContent>Play 3D</TooltipContent>
-            </Tooltip>
-          </TooltipProvider>
-        </Html>
       </group>
-    </Float>
-  )
-}
-
-export default function ChapterOne() {
-  const theme = useTheme().resolvedTheme as 'light' | 'dark'
-  return (
-    <>
-      {tiles({ theme })}
-
+      {/* </Float> */}
       <directionalLight
+        // ref={lightRef}
+        /*@ts-ignore */
+        target={target}
         /*@ts-ignore */
         castShadow
-        intensity={2}
-        position={[-15, 3, 0]}
+        intensity={5}
+        position={[-10, 10, 5]}
         shadow-mapSize={[256, 256]}
         shadow-camera-near={1}
         shadow-camera-far={10}
@@ -83,4 +100,10 @@ export default function ChapterOne() {
       />
     </>
   )
+}
+
+export default function ChapterOne() {
+  const theme = useTheme().resolvedTheme as 'light' | 'dark'
+
+  return <>{tiles({ theme })}</>
 }

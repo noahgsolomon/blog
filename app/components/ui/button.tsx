@@ -22,7 +22,7 @@ const buttonVariants = cva(
         ghost: 'hover:scale-[102%] active:scale-[98%] hover:bg-accent hover:text-accent-foreground',
         link: 'hover:scale-[102%] active:scale-[98%] text-primary underline-offset-4 hover:underline',
         none: 'hover:scale-[102%] active:scale-[98%] transition-all text-primary hover:opacity-80',
-        generate: 'border dark:border-transparent rounded-[14px] text-[15px] ',
+        generate: 'border dark:border-transparent',
       },
       size: {
         default: 'h-9 px-4 py-2',
