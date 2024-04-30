@@ -2,8 +2,8 @@ import React from 'react'
 import { useGLTF } from '@react-three/drei'
 import { AdditiveBlending, Color, DoubleSide, Mesh, ShaderMaterial, Uniform } from 'three'
 import { GroupProps, useFrame } from '@react-three/fiber'
-import { vertex as HologramVertexShader } from './shaders/hologram/vertex'
-import { fragment as HologramFragmentShader } from './shaders/hologram/fragment'
+import { vertex as HologramVertexShader } from '../shaders/hologram/vertex'
+import { fragment as HologramFragmentShader } from '../shaders/hologram/fragment'
 
 export default function CloneBunny(props: GroupProps) {
   const { nodes } = useGLTF('/models/clonebunny.glb')

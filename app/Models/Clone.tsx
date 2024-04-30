@@ -1,7 +1,7 @@
 'use client'
 import { useCursor } from '@react-three/drei'
 import { forwardRef, useEffect, useState } from 'react'
-import CloneBunny from '../CloneBunny'
+import CloneBunny from './CloneBunny'
 import { GroupProps } from '@react-three/fiber'
 import useEnvironment from '../store/useEnvironment'
 import { SpringValue, animated } from '@react-spring/three'

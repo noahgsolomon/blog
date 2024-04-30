@@ -264,7 +264,7 @@ li {
 
   cursor: pointer;
   color: var(--color-button);
-  border-radius: 100px;
+  border-radius: var(--radius);
   box-shadow: 0 8px calc(var(--button-shadow-spread) * 1px) -8px rgb(0 0 0 / calc(var(--button-shadow-opacity) * 1%));
 
   border: 1px solid var(--btn-border-color);
