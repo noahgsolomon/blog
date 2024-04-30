@@ -1,23 +1,29 @@
 'use client'
 import { Cow } from '@/Models/Cow'
 import { Button } from '@/components/ui/button'
-import { Html, useHelper } from '@react-three/drei'
-import { Play } from 'lucide-react'
+import { Center, Html } from '@react-three/drei'
 import { useTheme } from 'next-themes'
 import { useEffect, useRef, useState } from 'react'
-import { DirectionalLightHelper } from 'three'
+import usePlayStore from './store/PlayStore'
+import { CHECKPOINTS } from './Checkpoints'
+import * as THREE from 'three'
+import Markdown from 'react-markdown'
+import remarkMath from 'remark-math'
+import rehypeHighlight from 'rehype-highlight'
+import remarkGfm from 'remark-gfm'
+import rehypeKatex from 'rehype-katex'
+import rehypeRaw from 'rehype-raw'
+import PlayCard from './PlayCard'
 
-const Tiles = ({ theme }: { theme: 'light' | 'dark' }) => {
-  const gridSize = 8 // Define the size of one side of the grid
+export default function ChapterOne() {
+  const theme = useTheme().resolvedTheme as 'light' | 'dark'
+  const gridSize = 8
   const tilePositions = []
   for (let i = 0; i < gridSize * gridSize; i++) {
-    const x = i % gridSize // Calculates the column position
-    const z = Math.floor(i / gridSize) // Calculates the row position
+    const x = i % gridSize
+    const z = Math.floor(i / gridSize)
     tilePositions.push({ x, z })
   }
-
-  // const lightRef = useRef();
-  // useHelper(lightRef, DirectionalLightHelper, 3, 'red');
 
   const [target, setTarget] = useState()
   const gridRef = useRef()
@@ -28,9 +34,10 @@ const Tiles = ({ theme }: { theme: 'light' | 'dark' }) => {
     }
   }, [gridRef])
 
+  const { setCurrentPlayPosition, currentPlayPosition, setFocus, setLook } = usePlayStore()
+
   return (
     <>
-      {/* <Float speed={0.1} floatIntensity={0.1} floatingRange={[1, 2]}> */}
       <group ref={gridRef} position={[-10, 0, 0]}>
         {tilePositions.map(({ x, z }) => {
           const isOdd = (x + z) % 2 === 1
@@ -38,10 +45,6 @@ const Tiles = ({ theme }: { theme: 'light' | 'dark' }) => {
           let color
           if (isGold) {
             color = 'gold'
-          } else if (theme === 'dark') {
-            color = isOdd ? '#212336' : '#212336'
-          } else {
-            color = isOdd ? '#bcc0e3' : '#bcc0e3'
           }
 
           return (
@@ -49,25 +52,51 @@ const Tiles = ({ theme }: { theme: 'light' | 'dark' }) => {
               {/*@ts-ignore*/}
               <mesh receiveShadow key={`${x}-${z}`} position={[x - gridSize / 2 + 0.5, 0, z - gridSize / 2 + 0.5]}>
                 <boxGeometry args={[0.9, 0.1, 0.9]} />
-                <meshStandardMaterial receiveShadow color={color} />
+                <meshStandardMaterial
+                  receiveShadow
+                  color={isGold ? 'gold' : theme === 'dark' ? '#212336' : '#bcc0e3'}
+                />
+                {isGold && currentPlayPosition === 1 ? (
+                  <PlayCard
+                    castShadow
+                    position={[-2, 1.5, -1]}
+                    distanceFactor={5}
+                    markdown={CHECKPOINTS[0].play[currentPlayPosition].markdown}
+                  />
+                ) : null}
                 {x === 4 && z === 7 ? (
                   <>
                     <Cow position-y={0.1} rotation-y={-0.25 * Math.PI} scale={0.05} />
-                    <Html castShadow position={[0, 1, 0]} distanceFactor={10}>
-                      <Button
-                        variant='generate'
-                        size='sm'
-                        className={'generate-button whitespace-nowrap text-center outline-none transition-all'}
-                      >
-                        <div
-                          className={
-                            'border border-input bg-secondary p-1 tracking-wider outline-none text-xs text-primary'
-                          }
+                    {currentPlayPosition === -1 ? (
+                      <Html castShadow position={[0, 1, 0]} distanceFactor={10}>
+                        <Button
+                          onClick={() => {
+                            setCurrentPlayPosition(0)
+                            setFocus(new THREE.Vector3(...CHECKPOINTS[0].play[0].position))
+                            setLook(new THREE.Vector3(...CHECKPOINTS[0].play[0].look))
+                          }}
+                          variant='generate'
+                          size='sm'
+                          className={`generate-button whitespace-nowrap text-center outline-none transition-all`}
                         >
-                          Play
-                        </div>
-                      </Button>
-                    </Html>
+                          <div
+                            className={
+                              'border border-input bg-secondary p-1 tracking-wider outline-none text-xs text-primary'
+                            }
+                          >
+                            Play
+                          </div>
+                        </Button>
+                      </Html>
+                    ) : null}
+                    {currentPlayPosition === 0 ? (
+                      <PlayCard
+                        castShadow
+                        position={[0, 2, -2]}
+                        distanceFactor={5}
+                        markdown={CHECKPOINTS[0].play[currentPlayPosition].markdown}
+                      />
+                    ) : null}
                   </>
                 ) : null}
               </mesh>
@@ -75,9 +104,7 @@ const Tiles = ({ theme }: { theme: 'light' | 'dark' }) => {
           )
         })}
       </group>
-      {/* </Float> */}
       <directionalLight
-        // ref={lightRef}
         /*@ts-ignore*/
         target={target}
         /*@ts-ignore*/
@@ -95,9 +122,4 @@ const Tiles = ({ theme }: { theme: 'light' | 'dark' }) => {
       />
     </>
   )
-}
-
-export default function ChapterOne() {
-  const theme = useTheme().resolvedTheme as 'light' | 'dark'
-  return <Tiles theme={theme} />
 }
