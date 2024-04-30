@@ -1,6 +1,6 @@
 import React from 'react'
 import { useGLTF } from '@react-three/drei'
-import { AdditiveBlending, Color, DoubleSide, ShaderMaterial, Uniform } from 'three'
+import { AdditiveBlending, NormalBlending, NoBlending, Color, DoubleSide, ShaderMaterial, Uniform } from 'three'
 import { GroupProps, useFrame } from '@react-three/fiber'
 import { vertex as HologramVertexShader } from '../shaders/hologram/vertex'
 import { fragment as HologramFragmentShader } from '../shaders/hologram/fragment'
@@ -18,12 +18,12 @@ export function Cow(props: GroupProps) {
     fragmentShader: HologramFragmentShader,
     uniforms: {
       uTime: new Uniform(0),
-      uColor: new Uniform(new Color(theme === 'dark' ? '#70c1ff' : '#70c1ff')),
+      uColor: new Uniform(new Color(theme === 'dark' ? '#70c1ff' : '#000000')),
     },
     transparent: true,
     side: DoubleSide,
     depthWrite: false,
-    blending: AdditiveBlending,
+    blending: theme === 'dark' ? AdditiveBlending : NormalBlending,
   })
 
   useFrame((_, delta) => {
