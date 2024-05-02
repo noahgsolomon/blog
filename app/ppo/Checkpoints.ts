@@ -5,19 +5,30 @@ export const CHECKPOINTS = [
     look: [0, -2, 0],
     play: [
       {
-        position: [-12, 1, 2],
+        position: [-12, 1, -0.5],
         look: [6, 0, 2],
         markdown: `This is Ollie, our agent. He is currently dumb, but we will smarten him up more and more as we progress...
 <br></br>
-Ollie wants only 1 thing... and that is to maximize his average cumulative reward over many episodes.`,
+Ollie wants only 1 thing - to maximize his average cumulative reward.`,
       },
       {
         position: [-13, 3, -2],
         look: [0, -2, 2],
-        markdown: `His current objective: Make it to this golden tile in as few steps as possible. This is a very simple optimization problem, and we don't even need any neural networks to solve it.
+        markdown: `His current objective: Make it to this golden tile in as few steps as possible.
+        `,
+      },
+      {
+        position: [-10, 6, 2],
+        look: [0, -8, 0],
+        markdown: `The numbers on the tiles represent reward values that guide Ollie's decision-making. The edge tiles have a large negative reward (-100) to avoid going out of bounds, regular tiles have a small negative reward (-1) to encourage finding the shortest path, and the golden tile has a large positive reward (+100) to motivate reaching the goal quickly.
+        `,
+      },
+      {
+        position: [-10, 8, -3],
+        look: [0, -10, 5],
+        markdown: `By iteratively exploring the environment through trial and error, we will eventually reach an optimal policy which will maximize our cumulative reward.
 <br></br>
-We need to create a reward function R that takes in parameters of our state and the action we take to get a value of how good or bad taking that action was.
-
+As we can see by the arrows. Our current policy well understands the objective, and effectively leads Ollie to the gold tile, while minimizing the number of steps.
         `,
       },
     ],
