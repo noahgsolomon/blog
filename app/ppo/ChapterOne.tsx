@@ -14,6 +14,21 @@ import remarkGfm from 'remark-gfm'
 import rehypeKatex from 'rehype-katex'
 import rehypeRaw from 'rehype-raw'
 import PlayCard from './PlayCard'
+import HologramMaterial from '@/HologramMaterial'
+import { ArrowDown, ArrowLeft, ArrowRight, ArrowUp } from 'lucide-react'
+import { Arrow } from '@/Models/Arrow'
+
+const getArrowOpacity = (x: number, z: number, direction: 'up' | 'down' | 'left' | 'right') => {
+  const goldX = 1
+  const goldZ = 1
+
+  if (direction === 'up' && z < goldZ) return 0.8
+  if (direction === 'down' && z > goldZ) return 0.8
+  if (direction === 'left' && x > goldX) return 0.8
+  if (direction === 'right' && x < goldX) return 0.8
+
+  return 0.2 * Math.random()
+}
 
 export default function ChapterOne() {
   const theme = useTheme().resolvedTheme as 'light' | 'dark'
@@ -39,20 +54,36 @@ export default function ChapterOne() {
   return (
     <>
       <group ref={gridRef} position={[-10, 0, 0]}>
+        {currentPlayPosition === 2 ? (
+          <PlayCard
+            castShadow
+            position={[-1, 2, 2]}
+            distanceFactor={5}
+            markdown={CHECKPOINTS[0].play[currentPlayPosition].markdown}
+          />
+        ) : null}
+        {currentPlayPosition === 3 ? (
+          <PlayCard
+            castShadow
+            position={[0, 2, 2]}
+            distanceFactor={9}
+            markdown={CHECKPOINTS[0].play[currentPlayPosition].markdown}
+          />
+        ) : null}
         {tilePositions.map(({ x, z }) => {
-          const isOdd = (x + z) % 2 === 1
           const isGold = x === 1 && z === 1
-          let color
-          if (isGold) {
-            color = 'gold'
-          }
+          const isOuterTile = x === 0 || x === gridSize - 1 || z === 0 || z === gridSize - 1
 
           return (
             <>
               {/*@ts-ignore*/}
               <mesh receiveShadow key={`${x}-${z}`} position={[x - gridSize / 2 + 0.5, 0, z - gridSize / 2 + 0.5]}>
                 <boxGeometry args={[0.9, 0.1, 0.9]} />
-                <meshStandardMaterial color={isGold ? 'gold' : theme === 'dark' ? '#212336' : '#bcc0e3'} />
+                {isOuterTile ? (
+                  <HologramMaterial />
+                ) : (
+                  <meshStandardMaterial color={isGold ? 'gold' : theme === 'dark' ? '#212336' : '#bcc0e3'} />
+                )}
                 {isGold && currentPlayPosition === 1 ? (
                   <PlayCard
                     castShadow
@@ -61,7 +92,35 @@ export default function ChapterOne() {
                     markdown={CHECKPOINTS[0].play[currentPlayPosition].markdown}
                   />
                 ) : null}
-                {x === 4 && z === 7 ? (
+                {currentPlayPosition === 2 ? (
+                  <Html distanceFactor={10}>
+                    <div className={`${isGold ? 'text-green-500' : isOuterTile ? 'text-red-500' : 'text-red-500/50'}`}>
+                      {isGold ? '+100' : isOuterTile ? '-100' : '-1'}
+                    </div>
+                  </Html>
+                ) : null}
+                {currentPlayPosition === 3 && !isOuterTile && !isGold ? (
+                  <group position={[0, 0.2, 0]}>
+                    {/*right arrow */}
+                    <Arrow
+                      opacity={getArrowOpacity(x, z, 'left')}
+                      position={[-0.1, 0, 0.05]}
+                      rotation-y={0.5 * Math.PI}
+                    />
+                    {/*left arrow */}
+                    <Arrow
+                      opacity={getArrowOpacity(x, z, 'right')}
+                      position={[0.1, 0, 0]}
+                      rotation-y={-0.5 * Math.PI}
+                    />
+                    {/*up arrow */}
+                    <Arrow opacity={getArrowOpacity(x, z, 'up')} position={[0.02, 0, 0.1]} rotation-y={-1 * Math.PI} />
+                    {/*down arrow */}
+                    <Arrow opacity={getArrowOpacity(x, z, 'down')} position={[-0.02, 0, -0.1]} />
+                  </group>
+                ) : null}
+
+                {x === 4 && z === 5 ? (
                   <>
                     <Cow position-y={0.1} rotation-y={-0.25 * Math.PI} scale={0.05} />
                     {currentPlayPosition === -1 ? (
