@@ -35,7 +35,7 @@ export default function PlayCard({
       distanceFactor={distanceFactor}
     >
       {' '}
-      <div className='bg-popover/60 shadow-sm overflow-y-auto overflow-x-hidden border rounded-lg p-4 relative z-0 max-h-[250px] w-[300px] md:w-[400px]'>
+      <div className='bg-popover/90 shadow-sm overflow-y-auto overflow-x-hidden border rounded-lg p-4 relative z-0 max-h-[250px] w-[300px] md:w-[400px]'>
         <Markdown
           className='z-10 relative'
           remarkPlugins={[remarkGfm, remarkMath]}
