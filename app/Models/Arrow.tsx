@@ -28,6 +28,7 @@ export function Arrow({ opacity = 1, ...props }: ArrowProps) {
             /*@ts-ignore */
             castShadow
             receiveShadow
+            /*@ts-ignore */
             geometry={nodes.Object_5.geometry}
             material={material}
             scale={0.001}
