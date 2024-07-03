@@ -17,7 +17,7 @@ import ThemeButton from './ThemeButton'
 const NavBar = () => {
   return (
     <>
-      <header className='fixed left-0 right-0 top-0 z-20 border-b bg-card shadow-sm transition-all py-4'>
+      <header className='fixed left-0 right-0 top-0 z-20 transition-all py-4'>
         <div className='flex items-center justify-between px-[5%] md:px-[10%] py-1'>
           <div className='flex flex-row items-center gap-2'>
             <Link href={'/'}>//n</Link>

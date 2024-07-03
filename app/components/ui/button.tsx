@@ -9,19 +9,14 @@ const buttonVariants = cva(
   {
     variants: {
       variant: {
-        default:
-          'hover:scale-[102%] active:scale-[98%] transition-all bg-primary text-primary-foreground shadow hover:bg-primary/90',
-        robot:
-          'hover:scale-[102%] active:scale-[98%] transition-all bg-[#3A3D5E] text-primary-foreground shadow hover:bg-[#3A3D5E]/90',
-        destructive:
-          'hover:scale-[102%] active:scale-[98%] bg-destructive text-destructive-foreground shadow-sm hover:bg-destructive/90',
-        outline:
-          'hover:scale-[102%] active:scale-[98%] transition-all border border-input bg-background shadow-sm hover:bg-accent hover:text-accent-foreground',
-        secondary:
-          'hover:scale-[102%] active:scale-[98%] transition-all bg-secondary text-secondary-foreground shadow-sm hover:bg-secondary/80',
-        ghost: 'hover:scale-[102%] active:scale-[98%] hover:bg-accent hover:text-accent-foreground',
-        link: 'hover:scale-[102%] active:scale-[98%] text-primary underline-offset-4 hover:underline',
-        none: 'hover:scale-[102%] active:scale-[98%] transition-all text-primary hover:opacity-80',
+        default: ' transition-all bg-primary text-primary-foreground  hover:bg-primary/90',
+        robot: ' transition-all bg-[#3A3D5E] text-primary-foreground  hover:bg-[#3A3D5E]/90',
+        destructive: ' bg-destructive text-destructive-foreground  hover:bg-destructive/90',
+        outline: ' transition-all border border-input bg-background  hover:bg-accent hover:text-accent-foreground',
+        secondary: ' transition-all bg-secondary text-secondary-foreground  hover:bg-secondary/80',
+        ghost: ' hover:bg-accent hover:text-accent-foreground',
+        link: ' text-primary underline-offset-4 hover:underline',
+        none: ' transition-all text-primary hover:opacity-80',
         generate: 'border dark:border-transparent',
       },
       size: {

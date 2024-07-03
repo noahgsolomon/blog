@@ -39,9 +39,7 @@
     --input: 220 13% 91%;
     --ring: 224 71.4% 4.1%;
 
-    --radius: 0.5rem;
-
-
+    --radius: 0rem;
 
     /*generate button */
     --context-bg: hsl(0deg 0% 99%);
@@ -60,16 +58,10 @@
     --container-border-color: rgb(0 0 0 / 8%);
     --container-box-shadow-color: rgb(0 0 0 / 12%);
 
-    --timing: .3s;
-    --transitions:
-      --coord-y .075s linear,
-      --coord-x .075s linear,
-      --button-shadow-opacity var(--timing) ease,
-      --button-shadow-spread var(--timing) ease,
-      --button-bg-opacity var(--timing) ease,
-      --button-after-opacity var(--timing) ease,
-      opacity var(--timing) ease,
-      box-shadow var(--timing) ease,
+    --timing: 0.3s;
+    --transitions: --coord-y 0.075s linear, --coord-x 0.075s linear, --button-shadow-opacity var(--timing) ease,
+      --button-shadow-spread var(--timing) ease, --button-bg-opacity var(--timing) ease,
+      --button-after-opacity var(--timing) ease, opacity var(--timing) ease, box-shadow var(--timing) ease,
       background-image var(--timing) ease;
   }
 
@@ -114,7 +106,7 @@
   }
 
   code {
-    @apply bg-secondary rounded-sm p-[2px] font-bold
+    @apply bg-secondary rounded-sm p-[2px] font-bold;
   }
 
   html,
@@ -127,7 +119,6 @@
   }
 }
 
-
 image {
   width: auto;
   height: auto;
@@ -135,7 +126,7 @@ image {
 
 /* General styling for the code block */
 .hljs {
-  @apply overflow-x-auto font-thin !important
+  @apply overflow-x-auto font-thin !important;
 }
 
 code {
@@ -201,27 +192,33 @@ code {
 }
 
 .language-blue {
-  @apply bg-blue-500/50 rounded-none
+  @apply bg-blue-500/50 rounded-none;
 }
 
 .katex-html {
-  @apply hidden
+  @apply hidden;
 }
 
 p {
-  @apply text-xs md:text-sm text-primary
+  @apply text-xs md:text-sm text-primary;
 }
 
 math {
-  @apply bg-secondary border rounded-sm p-1 max-w-full overflow-x-auto pointer-events-auto !important
+  @apply bg-secondary border rounded-sm p-1 max-w-full overflow-x-auto pointer-events-auto !important;
 }
 
-mo, mfrac, mtext, mrow, msup, mi, annotation {
-  @apply text-[10px]
+mo,
+mfrac,
+mtext,
+mrow,
+msup,
+mi,
+annotation {
+  @apply text-[10px];
 }
 
 li {
-  @apply text-xs list-disc ml-4 text-primary
+  @apply text-xs list-disc ml-4 text-primary;
 }
 
 /* generate button*/
@@ -273,7 +270,8 @@ li {
   justify-content: center;
   position: relative;
   overflow: hidden;
-  background-image: conic-gradient(from 180deg,
+  background-image: conic-gradient(
+    from 180deg,
     var(--color-red) 0%,
     var(--color-orange) 10%,
     var(--color-olive) 20%,
@@ -284,16 +282,18 @@ li {
     var(--color-purple) 70%,
     var(--color-purpler) 80%,
     var(--color-pink) 90%,
-    var(--color-red) 100%);
+    var(--color-red) 100%
+  );
   background-size: calc(100% + 2px);
   background-position: -1px -1px;
-  transition: var(--transitions),
-  transform 0.2s ease-in-out;
+  transition:
+    var(--transitions),
+    transform 0.2s ease-in-out;
 
   & .inner {
     box-shadow:
-      inset 0 calc(var(--btn-inner-shadow)*2px) calc(var(--btn-inner-shadow)*1px) rgb(255 255 255 / 90%),
-      inset 0 calc(var(--btn-inner-shadow)*-2px) calc(var(--btn-inner-shadow)*3px) rgb(0 0 0 / 3%);
+      inset 0 calc(var(--btn-inner-shadow) * 2px) calc(var(--btn-inner-shadow) * 1px) rgb(255 255 255 / 90%),
+      inset 0 calc(var(--btn-inner-shadow) * -2px) calc(var(--btn-inner-shadow) * 3px) rgb(0 0 0 / 3%);
   }
 
   &:before,
@@ -306,21 +306,24 @@ li {
     position: absolute;
     width: 100%;
     height: 100%;
-    transition: var(--transitions),
+    transition:
+      var(--transitions),
       transform 0.2s ease-in-out;
 
-    background-image: conic-gradient(from 180deg,
-        var(--color-red) 0%,
-        var(--color-orange) 10%,
-        var(--color-olive) 20%,
-        var(--color-lime) 30%,
-        var(--color-teal) 40%,
-        var(--color-tealer) 50%,
-        var(--color-blue) 60%,
-        var(--color-purple) 70%,
-        var(--color-purpler) 80%,
-        var(--color-pink) 90%,
-        var(--color-red) 100%);
+    background-image: conic-gradient(
+      from 180deg,
+      var(--color-red) 0%,
+      var(--color-orange) 10%,
+      var(--color-olive) 20%,
+      var(--color-lime) 30%,
+      var(--color-teal) 40%,
+      var(--color-tealer) 50%,
+      var(--color-blue) 60%,
+      var(--color-purple) 70%,
+      var(--color-purpler) 80%,
+      var(--color-pink) 90%,
+      var(--color-red) 100%
+    );
   }
 
   &:before {
@@ -331,10 +334,10 @@ li {
 
   &:after {
     filter: saturate(2) blur(5px);
-    transform: translate(calc(calc(var(--coord-x)/1.5) * 1px), calc(calc(var(--coord-y)/1.5) * -1px));
+    transform: translate(calc(calc(var(--coord-x) / 1.5) * 1px), calc(calc(var(--coord-y) / 1.5) * -1px));
     width: 180%;
     height: 180%;
-    opacity: calc(var(--button-after-opacity)/3);
+    opacity: calc(var(--button-after-opacity) / 3);
   }
 
   & span {
@@ -352,7 +355,8 @@ li {
     --button-after-opacity: 0.7;
     opacity: 0.8;
     transform: scale(1.02);
-    transition: var(--transitions),
+    transition:
+      var(--transitions),
       transform 0.2s ease-in-out;
   }
 
@@ -365,12 +369,13 @@ li {
     --button-shadow-spread: 16;
     --button-after-opacity: 0.7;
 
-    transition: var(--transitions),
+    transition:
+      var(--transitions),
       transform 0.2s ease-in-out;
   }
 }
 
-[data-theme="dark"] .generate-button {
+[data-theme='dark'] .generate-button {
   &:hover {
     --button-after-opacity: 0.75;
 
@@ -381,8 +386,8 @@ li {
 
   & .inner {
     box-shadow:
-      inset 0 calc(var(--btn-inner-shadow)*2px) calc(var(--btn-inner-shadow)*3px) rgb(255 255 255 / 1%),
-      inset 0 calc(var(--btn-inner-shadow)*-2px) calc(var(--btn-inner-shadow)*3px) rgb(0 0 0 / 25%);
+      inset 0 calc(var(--btn-inner-shadow) * 2px) calc(var(--btn-inner-shadow) * 3px) rgb(255 255 255 / 1%),
+      inset 0 calc(var(--btn-inner-shadow) * -2px) calc(var(--btn-inner-shadow) * 3px) rgb(0 0 0 / 25%);
   }
 
   & span {

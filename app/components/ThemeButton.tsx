@@ -26,65 +26,38 @@ export default function ThemeButton({ className = '' }: { className?: string }) 
   }
 
   return (
-    <DropdownMenu>
-      <DropdownMenuTrigger
-        className={buttonVariants({
-          variant: 'outline',
-          className: className,
-        })}
-      >
-        {theme === 'light' ? (
+    <>
+      {theme === 'light' ? (
+        <Button
+          onClick={() => {
+            setTheme('dark')
+            setThemee('dark')
+          }}
+          variant='outline'
+        >
           <SunIcon className='size-4' />
-        ) : theme === 'dark' ? (
+        </Button>
+      ) : theme === 'dark' ? (
+        <Button
+          onClick={() => {
+            setTheme('light')
+            setThemee('light')
+          }}
+          variant='outline'
+        >
           <MoonIcon className='size-4' />
-        ) : (
-          <Laptop2 className='size-4' />
-        )}
-      </DropdownMenuTrigger>
-      <DropdownMenuContent className='flex flex-col gap-1'>
-        <DropdownMenuItem asChild>
-          <Button
-            variant={'outline'}
-            size='sm'
-            className='cursor-pointer gap-2'
-            onClick={() => {
-              setTheme('light')
-              setThemee('light')
-            }}
-          >
-            <SunIcon className='size-4' />
-            Light
-          </Button>
-        </DropdownMenuItem>
-        <DropdownMenuItem asChild>
-          <Button
-            variant={'outline'}
-            size='sm'
-            className='cursor-pointer gap-2'
-            onClick={() => {
-              setTheme('dark')
-              setThemee('dark')
-            }}
-          >
-            <MoonIcon className='size-4' />
-            Dark
-          </Button>
-        </DropdownMenuItem>
-        <DropdownMenuItem asChild>
-          <Button
-            variant={'outline'}
-            size='sm'
-            className='cursor-pointer gap-2'
-            onClick={() => {
-              setTheme('system')
-              setThemee('system')
-            }}
-          >
-            <Laptop2 className='size-4' />
-            System
-          </Button>
-        </DropdownMenuItem>
-      </DropdownMenuContent>
-    </DropdownMenu>
+        </Button>
+      ) : (
+        <Button
+          onClick={() => {
+            setTheme('dark')
+            setThemee('dark')
+          }}
+          variant='outline'
+        >
+          <SunIcon className='size-4' />
+        </Button>
+      )}
+    </>
   )
 }
