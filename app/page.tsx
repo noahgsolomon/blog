@@ -48,25 +48,14 @@ export default function Page() {
 
   return (
     <div className='w-screen h-screen'>
-      <div className='flex flex-col  gap-24 md:px-24 px-4 max-w-[800px] mx-auto items-center justify-center w-full'>
+      <div className='flex flex-col  gap-24 md:px-24 px-4 max-w-[800px] mx-auto w-full'>
         {/* <Navbar /> */}
         <div className='pt-24 flex flex-col gap-2'>
           <p className='text-lg'>
             Sup I'm <span className='underline'>Noah</span>.
-            <span className=''>
-              {' '}
-              I like to talk about <span className='underline'>machine learning</span> concepts and present them in a
-              digestible and simple way.
-            </span>
+            <span className=''> I like to talk about machine learning and other random stuff.</span>
           </p>
           <div className='flex flex-row gap-2'>
-            <Link
-              target='_blank'
-              className={buttonVariants({ variant: 'secondary', size: 'sm' })}
-              href={'https://noahgsolomon.com'}
-            >
-              About Me
-            </Link>
             <Link
               target='_blank'
               href={'https://github.com/noahgsolomon'}
@@ -94,15 +83,31 @@ export default function Page() {
           <p className=''>Articles</p>
           <div className='border flex flex-col gap-2 rounded-lg p-4'>
             <div className='flex flex-col gap-2 z-10'>
+              <p className=' '>How do react native and expo even work?</p>
+              <p className='text-xs text-primary/60'>
+                From bundling, to the bridge, to native modules, to the different javascript runtimes, this article go
+                through it all. No rock left unturned!
+              </p>
+              <Image src={'/petergriffin.gif'} width={400} height={200} className='w-full' alt='js bridge' />
+              <div className='flex flex-row gap-2'>
+                <Button size='sm' disabled>
+                  Coming soon
+                </Button>
+              </div>
+            </div>
+          </div>
+          <div className='border flex flex-col gap-2 rounded-lg p-4'>
+            <div className='flex flex-col gap-2 z-10'>
               <p className=' '>So what is superposition?</p>
               <p className='text-xs text-primary/60'>
                 What is superposition, why it arises in neural networks, and interesting properties of positive and
                 negative interference.
               </p>
+              <Image src={'/superposition.png'} width={400} height={200} className='w-full' alt='js bridge' />
               <div className='flex flex-row gap-2'>
-                <Link href={'/ppo'} className={buttonVariants({ size: 'sm' })}>
-                  Learn Now
-                </Link>
+                <Button size='sm' disabled>
+                  Coming soon
+                </Button>
               </div>
             </div>
           </div>
@@ -116,9 +121,9 @@ export default function Page() {
                 Top down demonstration of PPO, and what pain points algorithms before it faced that PPO aims to fix.
               </p>
               <div className='flex flex-row gap-2'>
-                <Link href={'/ppo'} className={buttonVariants({ size: 'sm' })}>
-                  Learn Now
-                </Link>
+                <Button size='sm' disabled>
+                  Coming soon
+                </Button>
                 <Tooltip>
                   <TooltipTrigger asChild>
                     <Button onClick={() => setView3DPPO(true)} variant='outline' size='sm'>
