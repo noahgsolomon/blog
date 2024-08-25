@@ -4,7 +4,6 @@ import React, { useRef } from 'react'
 import { useGLTF } from '@react-three/drei'
 import { GroupProps } from '@react-three/fiber'
 import { MeshStandardMaterial } from 'three'
-import { useTheme } from 'next-themes'
 
 type ArrowProps = GroupProps & {
   opacity?: number
@@ -12,7 +11,7 @@ type ArrowProps = GroupProps & {
 
 export function Arrow({ opacity = 1, ...props }: ArrowProps) {
   const { nodes, materials } = useGLTF('/models/arrow.glb')
-  const theme = useTheme().resolvedTheme
+  const theme = 'dark'
 
   const material = new MeshStandardMaterial({
     opacity,

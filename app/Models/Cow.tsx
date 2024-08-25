@@ -4,14 +4,13 @@ import { AdditiveBlending, NormalBlending, NoBlending, Color, DoubleSide, Shader
 import { GroupProps, useFrame } from '@react-three/fiber'
 import { vertex as HologramVertexShader } from '../shaders/hologram/vertex'
 import { fragment as HologramFragmentShader } from '../shaders/hologram/fragment'
-import { useTheme } from 'next-themes'
 
 export function Cow(props: GroupProps) {
   const { nodes, materials } = useGLTF('/models/cow.glb')
 
   // materials.palette.castShadow = true
 
-  const theme = useTheme().resolvedTheme
+  const theme = 'dark'
 
   const material = new ShaderMaterial({
     vertexShader: HologramVertexShader,
