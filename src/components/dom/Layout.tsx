@@ -2,7 +2,7 @@
 
 import { useRef } from 'react'
 import dynamic from 'next/dynamic'
-import Providers from '@/lib/Providers'
+import Providers from '@/providers'
 const Scene = dynamic(() => import('@/components/canvas/Scene'), { ssr: false })
 
 const Layout = ({ children }) => {
@@ -11,7 +11,7 @@ const Layout = ({ children }) => {
   return (
     <div
       ref={ref}
-      className='bg-background text-foreground'
+      className='bg-background text-foreground dark'
       style={{
         position: 'relative',
         width: ' 100%',

@@ -1,3 +1,0 @@
-tried fixing agent tiles after regeneration of tile map but to no avail. It is as if the agents see some map that is different from as seen on screen.
-
-or an equally likely possibility that there position x and position y are just not proper

@@ -75,7 +75,7 @@
     --popover: 224 71.4% 4.1%;
     --popover-foreground: 210 20% 98%;
 
-    --primary: 229 73% 93%;
+    --primary: 210 20% 98%;
     --primary-foreground: 220.9 39.3% 11%;
 
     --secondary: 215 27.9% 16.9%;
@@ -105,6 +105,10 @@
     @apply bg-background text-foreground font-krypton;
   }
 
+  code {
+    @apply bg-secondary rounded-sm p-[2px] font-bold;
+  }
+
   html,
   body,
   #root {
@@ -126,8 +130,12 @@ image {
 }
 
 code {
-  @apply whitespace-pre-wrap text-primary !important;
+  @apply whitespace-pre-wrap text-primary font-krypton !important;
   /* This will wrap the text inside the code block */
+}
+
+.code-language {
+  @apply text-[#555] bg-[#eee] px-2 py-1 rounded-lg text-sm mb-2 inline-block !important;
 }
 
 /* Keyword styling (like def, if, else, return) */
@@ -389,7 +397,7 @@ li {
 
 p,
 a {
-  @apply leading-[30px] text-base text-primary/80;
+  @apply leading-[30px] text-base;
 }
 
 h1 {
@@ -422,7 +430,7 @@ h6 {
 }
 
 pre {
-  @apply max-w-full overflow-x-auto bg-card p-2 rounded-lg !important;
+  @apply max-w-full overflow-x-auto bg-card p-2 rounded-lg border border-border !important;
 }
 
 code {
@@ -541,101 +549,4 @@ input {
 mrow,
 mtext {
   @apply overflow-x-auto overflow-y-hidden;
-}
-
-/*zig.style.css */
-/* 关键字 */
-.hljs-keyword {
-  color: #c678dd;
-  /* 深紫色，用于突出关键字 */
-}
-
-/* 标点符号 */
-.hljs-punctuation {
-  color: #8ff810;
-  /* 淡蓝色，用于标点符号，避免与操作符颜色混淆 */
-}
-
-/* 可选参数和类型 */
-.hljs-optional {
-  color: #e5c07b;
-  /* 橙色，用于突出显示可选参数和类型 */
-}
-
-/* 错误处理符号 */
-.hljs-errorhandling {
-  color: #e06c75;
-  /* 淡红色，用于错误处理符号 */
-}
-
-/* 宏调用 */
-.hljs-macro {
-  color: #61afef;
-  /* 亮蓝色，用于宏调用，保持加粗 */
-  font-weight: bold;
-}
-
-/* 函数声明 */
-.hljs-function {
-  color: #61afef;
-  /* 深蓝色，用于函数声明 */
-}
-
-/* 函数调用 */
-.hljs-function-call {
-  color: #e5c07b;
-  /* 橙色，用于突出显示函数调用 */
-}
-
-/* 函数参数 */
-.hljs-params {
-  color: #98c379;
-  /* 淡绿色，用于函数参数 */
-}
-
-/* 操作符 */
-.hljs-operator {
-  color: #d19a66;
-  /* 棕色，用于操作符，与标点符号区分 */
-}
-
-/* 数字 */
-.hljs-number {
-  color: #dcdcaa;
-  /* 淡黄色，用于数字 */
-}
-
-/* 字符串 */
-.hljs-string {
-  color: #98c379;
-  /* 淡绿色，用于字符串 */
-}
-
-/* 注释 */
-.hljs-comment {
-  color: #5c6370;
-  /* 淡灰色，用于注释，确保清晰可读 */
-}
-
-/* TODO注释 */
-.hljs-comment-todo {
-  color: #d19a66;
-  /* 橙色，用于TODO注释 */
-  font-weight: bold;
-  /* 加粗，以增加可见性 */
-}
-
-.hljs-meta-event {
-  color: #ff79c6;
-  /* 粉色 */
-  font-weight: bold;
-  /* 加粗 */
-}
-
-.hljs-literal {
-  color: #e06c75;
-}
-
-.hljs-multiline {
-  color: #e67e22;
 }

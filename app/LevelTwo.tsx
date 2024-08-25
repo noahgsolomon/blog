@@ -11,12 +11,10 @@ import HologramMaterial from './HologramMaterial'
 import Gum from './Models/Gum'
 import useEnvironment from './store/useEnvironment'
 import { Position, TileType, DefaultTile, GumTile, HologramTile, State } from '@/index.d'
-import { Perf } from 'r3f-perf'
 import useGameState from './store/useGameState'
 
 import { createModelCpu, runModel, warmupModel } from './runModel'
 import { InferenceSession } from 'onnxruntime-web/wasm'
-import { useTheme } from 'next-themes'
 
 export const NUM_AGENTS = 10
 
@@ -24,7 +22,7 @@ export default function LevelTwo() {
   const [policyNetwork, setPolicyNetwork] = useState<InferenceSession>(null)
   const [intervalIter, setIntervalIter] = useState(0)
 
-  const theme = useTheme().resolvedTheme
+  const theme = 'dark'
 
   useEffect(() => {
     const loadModels = async () => {

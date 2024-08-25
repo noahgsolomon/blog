@@ -3,10 +3,9 @@ import { AdditiveBlending, Color, DoubleSide, ShaderMaterial, Uniform } from 'th
 import { fragment } from './shaders/hologram/fragment'
 import { vertex } from './shaders/hologram/vertex'
 import { useFrame } from '@react-three/fiber'
-import { useTheme } from 'next-themes'
 
 export default function HologramMaterial() {
-  const theme = useTheme().resolvedTheme
+  const theme = 'dark'
   const material = new ShaderMaterial({
     uniforms: {
       uTime: new Uniform(0),

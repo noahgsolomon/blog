@@ -1,11 +1,11 @@
-import { Layout } from '@/components/dom/Layout'
 import '@/globals.css'
 import localFont from 'next/font/local'
 import { cn } from './lib/utils'
-import { Toaster } from '@/components/ui/sonner'
 import { Metadata } from 'next'
+import Link from 'next/link'
+import Providers from './providers'
 
-const krypton = localFont({ src: '../public/krypton.otf' })
+const jetbrains = localFont({ src: '../public/JetBrainsMonoNerdFontMono-Regular.ttf' })
 
 export const metadata: Metadata = {
   title: 'Noah Solomon Blog',
@@ -14,17 +14,42 @@ export const metadata: Metadata = {
 
 export default function RootLayout({ children }) {
   return (
-    <html lang='en' className={cn('antialiased', krypton.className)} suppressHydrationWarning>
-      {/*
-        <head /> will contain the components returned by the nearest parent
-        head.tsx. Find out more at https://beta.nextjs.org/docs/api-reference/file-conventions/head
-      */}
+    <html lang='en' className={cn('antialiased', jetbrains.className)} suppressHydrationWarning>
       <head />
-      <body>
-        {/* To avoid FOUT with styled-components wrap Layout with StyledComponentsRegistry https://beta.nextjs.org/docs/styling/css-in-js#styled-components */}
-        <Layout>{children}</Layout>
-        <Toaster duration={2000} richColors />
-      </body>
+      <Providers>
+        <body className='dark'>
+          {children}
+          <footer className='w-full py-4 px-4'>
+            <div className='flex flex-col items-center gap-2 max-w-[600px] mx-auto'>
+              <div className='flex flex-row gap-4'>
+                {/* Updated Link component with visited state */}
+                <Link
+                  target='_blank'
+                  href={'https://github.com/noahgsolomon'}
+                  className='underline underline-offset-4 text-[#5692ae] hover:text-[#5692ae] visited:text-[#8466aa]'
+                >
+                  github
+                </Link>
+                <Link
+                  target='_blank'
+                  href={'https://twitter.com/noahgsolomon'}
+                  className='underline underline-offset-4 text-[#5692ae] hover:text-[#5692ae] visited:text-[#8466aa]'
+                >
+                  x.com
+                </Link>
+                <Link
+                  target='_blank'
+                  href={'https://www.linkedin.com/in/noahgsolomon'}
+                  className='underline underline-offset-4 text-[#5692ae] hover:text-[#5692ae] visited:text-[#8466aa]'
+                >
+                  linkedin
+                </Link>
+              </div>
+              <p className='text-primary/60'>© 2024 noahgsolomon</p>
+            </div>
+          </footer>
+        </body>
+      </Providers>
     </html>
   )
 }
