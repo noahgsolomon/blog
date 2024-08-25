@@ -13,8 +13,12 @@ import { nightOwl } from 'react-syntax-highlighter/dist/esm/styles/hljs'
 hljs.registerLanguage('zig', hljsZig)
 
 const md = `
-**So we want to make a programming language**, and we just wrote a file which kinda looks like it's written in a programming language, but this language doesn't exist. The question is, how do we build this language ourself so that we can execute this file?
-The first step for any programming language fundamentally, is to go from a string, to a list of strings. The string we're referring to is the source code. The list of strings we're referring to are known as lexemes. A lexeme is the smallest unit of any language, and comprises things like keywords, characters like "(", "&", etc. Now, we should have a way to differentiate those lexemes from each other based on their "type". This is where tokens come into play. We want to have a data structure that holds more information about a given lexeme than just its string value in the source code. A good start would be storing its type (like what keyword it is, if it is an identifier, a string literal, numeric literal, not equal sign, etc.), it's lexeme, and it's literal value (which will be void for all lexemes that aren't numeric or string literals). We'll also store the line number we found this lexeme on for debugging purposes. We'll later use these tokens to make a unified data structure called the parse tree / abstract syntax tree which will signify the actual meaning behind the program.  
+**So we want to make a programming language**, and we just wrote a file which kinda looks like it's written in a programming language, but this language doesn't exist. The question is, how do we build this language ourselves so that we can execute this file? Before we get into it I want to mention this is a zig implementation of what is built in java in the [Crafting Interpreters](https://craftinginterpreters.com/) book (it's a goated book 10/10 recommend).
+
+The first step for any programming language fundamentally, is to go from a string, to a list of strings. The string we're referring to is the source code. The list of strings we're referring to are known as lexemes. A lexeme is the smallest unit of any language, and comprises things like keywords, characters like "(", "&", etc. Now, we should have a way to differentiate those lexemes from each other based on their "type". This is where tokens come into play. We want to have a data structure that holds more information about a given lexeme than just its string value in the source code.
+
+A good start would be storing its type (like what keyword it is, if it is an identifier, a string literal, numeric literal, not equal sign, etc.), it's lexeme, and it's literal value (which will be void for all lexemes that aren't numeric or string literals). We'll also store the line number we found this lexeme on for debugging purposes. We'll later use these tokens to make a unified data structure called the parse tree / abstract syntax tree which will signify the actual meaning behind the program.  
+
 So to take an example, if we have a file which just contains the text '"hello world"' in it, the only token our scanner should generate would look like this:
 
 \`\`\`zig
@@ -596,6 +600,14 @@ export default function Page() {
               </code>
             )
           },
+          a: ({ href, children }) => (
+            <Link
+              href={href}
+              className='underline underline-offset-4 text-[#5692ae] hover:text-[#5692ae] visited:text-[#8466aa]'
+            >
+              {children}
+            </Link>
+          ),
         }}
         className='pt-8 flex flex-col gap-6 leading-relaxed tracking-wide'
         remarkPlugins={[remarkGfm, remarkMath]}
