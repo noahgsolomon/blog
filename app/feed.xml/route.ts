@@ -19,7 +19,8 @@ export async function GET() {
     {
       id: 'lexer-in-zig',
       title: 'Writing a Lexer in Zig',
-      description: 'Writing a lexer in zig for a simple interpreted programming language!',
+      description:
+        'How to implement a lexer in Zig for a simple interpreted programming language, including concepts like lexemes, tokens, and scanning source code, with detailed steps and code examples.',
       tags: ['zig', 'lexer', 'interpreter'],
       date: '2024-08-25',
     },
