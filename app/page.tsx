@@ -3,8 +3,8 @@ import { Badge } from './components/ui/badge'
 
 export default function Page() {
   return (
-    <div className='flex flex-col gap-24 text-center px-4 mx-auto max-w-[600px] w-full sm:pt-48 items-center'>
-      <div className='sm:pt-24 flex flex-col gap-2'>
+    <div className='flex flex-col gap-12 sm:gap-24 text-center px-4 mx-auto max-w-[600px] w-full sm:pt-48 items-center'>
+      <div className='pt-24 flex flex-col gap-2'>
         <p className='text-lg'>NOAHGSOLOMON v.0.4.1</p>
         <p>cs undergrad who just wants to cook.</p>
       </div>
