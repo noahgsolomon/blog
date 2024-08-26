@@ -7,7 +7,16 @@ export default function Page() {
       <div className='pt-24 flex flex-col gap-2'>
         <p className='text-lg'>NOAHGSOLOMON v.0.4.1</p>
         <p>cs undergrad who just wants to cook.</p>
+
+        <Link
+          target='_blank'
+          href={'/feed.xml'}
+          className='text-sm underline underline-offset-4 text-[#5692ae] hover:text-[#5692ae] visited:text-[#8466aa]'
+        >
+          rss feed
+        </Link>
       </div>
+
       <div className='w-full flex flex-col'>
         <Link href={'/lexer-in-zig'} className='p-3 flex flex-col gap-2 rounded-lg relative hover:bg-[#1a1b26] group'>
           <div className='flex flex-col gap-2 z-10'>
