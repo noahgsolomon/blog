@@ -9,7 +9,7 @@
   },
   "scripts": {
     "lint": "next lint --fix --dir app",
-"dev": "next dev -H 0.0.0.0",
+    "dev": "next dev -H 0.0.0.0",
     "build": "next build",
     "analyze": "ANALYZE=true next build",
     "start": "next start",
@@ -64,6 +64,7 @@
     "rehype-slug": "^6.0.0",
     "remark-gfm": "^4.0.0",
     "remark-math": "^6.0.0",
+    "rss": "^1.2.2",
     "sonner": "^1.4.3",
     "tailwind-merge": "^2.2.1",
     "tailwindcss-animate": "^1.0.7",
