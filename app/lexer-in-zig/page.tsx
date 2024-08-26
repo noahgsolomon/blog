@@ -1,16 +1,14 @@
-'use client'
-import Markdown from 'react-markdown'
-import rehypeRaw from 'rehype-raw'
-import remarkMath from 'remark-math'
-import remarkGfm from 'remark-gfm'
-import rehypeKatex from 'rehype-katex'
-import Link from 'next/link'
 import hljs from 'highlight.js'
 import hljsZig from 'highlightjs-zig'
-import SyntaxHighlighter from 'react-syntax-highlighter'
-import { nightOwl } from 'react-syntax-highlighter/dist/esm/styles/hljs'
+import { Metadata } from 'next'
+import Blog from '@/blog'
 // Register Zig language for highlight.js
 hljs.registerLanguage('zig', hljsZig)
+
+export const metadata: Metadata = {
+  title: 'Writing a Lexer in Zig',
+  description: 'Writing a lexer in zig for a simple interpreted programming language!',
+}
 
 const md = `
 **So we want to make a programming language**, and we just wrote a file which kinda looks like it's written in a programming language, but this language doesn't exist. The question is, how do we build this language ourselves so that we can execute this file? Before we get into it I want to mention this is a zig implementation of what is built in java in the [Crafting Interpreters](https://craftinginterpreters.com/) book (it's a goated book 10/10 recommend).
@@ -573,48 +571,5 @@ We can now build our program with \`zig build\` and will now be able to scan sou
 `
 
 export default function Page() {
-  return (
-    <div className='flex flex-col px-4 mx-auto max-w-[800px] w-full py-12 min-h-[90vh]'>
-      <Link
-        href={'/'}
-        className='underline underline-offset-4 pb-8 text-[#5692ae] hover:text-[#5692ae] visited:text-[#8466aa]'
-      >
-        home
-      </Link>
-      <p className='text-primary/60 pb-4'>aug 25, 2024</p>
-      <h1 className='border-b text-3xl pb-8'>writing a lexer in zig</h1>
-      <Markdown
-        components={{
-          code: ({ className, children, ...props }) => {
-            const match = /language-(\w+)/.exec(className ?? '')
-            return match ? (
-              <div>
-                {/* <p className='border inline-block bg-background p-1'>{match[1]}</p> */}
-                <SyntaxHighlighter style={nightOwl} language={match[1]}>
-                  {children}
-                </SyntaxHighlighter>
-              </div>
-            ) : (
-              <code className={className} {...props}>
-                {children}
-              </code>
-            )
-          },
-          a: ({ href, children }) => (
-            <Link
-              href={href}
-              className='underline underline-offset-4 text-[#5692ae] hover:text-[#5692ae] visited:text-[#8466aa]'
-            >
-              {children}
-            </Link>
-          ),
-        }}
-        className='pt-8 flex flex-col gap-6 leading-relaxed tracking-wide'
-        remarkPlugins={[remarkGfm, remarkMath]}
-        rehypePlugins={[rehypeKatex, rehypeRaw]}
-      >
-        {md}
-      </Markdown>
-    </div>
-  )
+  return <Blog md={md} date='aug 25, 2024' />
 }
