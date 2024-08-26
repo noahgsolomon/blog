@@ -17,7 +17,7 @@ export default function RootLayout({ children }) {
     <html lang='en' className={cn('antialiased', jetbrains.className)} suppressHydrationWarning>
       <head />
       <Providers>
-        <body className='dark flex flex-col min-h-[75vh] sm:min-h-screen'>
+        <body className='dark flex flex-col h-[80vh] sm:min-h-screen'>
           <div className='grow'>{children}</div>
           <footer className='w-full px-4'>
             <div className='flex flex-col items-center gap-2 max-w-[600px] mx-auto'>
