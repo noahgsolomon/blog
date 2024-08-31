@@ -55,8 +55,9 @@ export default function Blog({ md, date }: { md: string; date: string }) {
             {md}
           </Markdown>
         </div>
+
+        <Footer root={false} />
       </div>
-      <Footer root={false} />
     </>
   )
 }

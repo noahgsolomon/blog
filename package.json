@@ -68,7 +68,7 @@
     "sonner": "^1.4.3",
     "tailwind-merge": "^2.2.1",
     "tailwindcss-animate": "^1.0.7",
-    "three": "^0.160.0",
+    "three": "^0.168.0",
     "three-stdlib": "^2.28.9",
     "tunnel-rat": "^0.1.2",
     "zustand": "^4.5.2"

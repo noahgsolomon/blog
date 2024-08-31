@@ -2,7 +2,7 @@ import Link from 'next/link'
 
 export default function Footer({ root }: { root: boolean }) {
   return (
-    <footer className='w-full px-4'>
+    <footer className={root ? 'absolute bottom-0 w-full z-10' : 'w-full px-4'}>
       <div
         className={`text-left ${root ? 'items-center' : 'text-left'} mx-auto flex flex-col gap-2 pb-4 max-w-[750px]`}
       >
@@ -30,7 +30,7 @@ export default function Footer({ root }: { root: boolean }) {
             linkedin
           </Link>
         </div>
-        <p className='text-primary/60'>© 2024 noahgsolomon. all rights reserved.</p>
+        <p className='text-primary/60'>© 2024 noahgsolomon{root ? '' : '. all rights reserved.'}</p>
       </div>
     </footer>
   )
