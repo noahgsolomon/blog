@@ -5,7 +5,7 @@ import { GroupProps, useFrame } from '@react-three/fiber'
 import { vertex as HologramVertexShader } from '../shaders/hologram/vertex'
 import { fragment as HologramFragmentShader } from '../shaders/hologram/fragment'
 
-export default function CloneZig(props: GroupProps) {
+export default function CloneZig(props: GroupProps, opacity?: number) {
   const { nodes } = useGLTF('/models/zigv8.gltf')
 
   const material = new ShaderMaterial({
@@ -14,6 +14,7 @@ export default function CloneZig(props: GroupProps) {
     uniforms: {
       uTime: new Uniform(0),
       uColor: new Uniform(new Color('#f7a41d')),
+      uOpacity: new Uniform(opacity ?? 0.5),
     },
     transparent: true,
     side: DoubleSide,

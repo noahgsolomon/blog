@@ -9,6 +9,7 @@ import CloneBunny from './Models/CloneBunny'
 import Zig from './Models/Zig'
 import Lights from './Lights'
 import CloneZig from './Models/CloneZig'
+import CloneFemaleChicken from './Models/CloneFemaleChicken'
 
 function Chicken({ index, z, speed }) {
   const ref = useRef()
@@ -35,7 +36,9 @@ function Chicken({ index, z, speed }) {
     if (data.y > height * (index === 0 ? 4 : 1)) data.y = -(height * (index === 0 ? 4 : 1))
   })
 
-  return <group ref={ref}>{Math.random() > 0.4 ? <CloneBunny /> : <CloneZig scale={0.025} />}</group>
+  return (
+    <group ref={ref}>{Math.random() > 0.4 ? <CloneFemaleChicken scale={0.1} /> : <CloneZig scale={0.025} />}</group>
+  )
 }
 
 export default function Falling3D() {

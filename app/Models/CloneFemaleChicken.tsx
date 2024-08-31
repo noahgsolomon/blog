@@ -1,19 +1,19 @@
 import React from 'react'
-import { AsciiRenderer, useGLTF } from '@react-three/drei'
+import { useGLTF } from '@react-three/drei'
 import { AdditiveBlending, Color, DoubleSide, Mesh, ShaderMaterial, Uniform } from 'three'
 import { GroupProps, useFrame } from '@react-three/fiber'
 import { vertex as HologramVertexShader } from '../shaders/hologram/vertex'
 import { fragment as HologramFragmentShader } from '../shaders/hologram/fragment'
 
-export default function CloneBunny(props: GroupProps, opacity?: number) {
-  const { nodes } = useGLTF('/models/clonebunny.glb')
+export default function CloneChicken(props: GroupProps, opacity?: number) {
+  const { nodes } = useGLTF('/models/femalechicken.glb')
 
   const material = new ShaderMaterial({
     vertexShader: HologramVertexShader,
     fragmentShader: HologramFragmentShader,
     uniforms: {
       uTime: new Uniform(0),
-      uColor: new Uniform(new Color('#f7a41d')),
+      uColor: new Uniform(new Color('#70c1ff')),
       uOpacity: new Uniform(opacity ?? 0.5),
     },
     transparent: true,
@@ -30,7 +30,7 @@ export default function CloneBunny(props: GroupProps, opacity?: number) {
     <group scale={0.25} {...props} dispose={null}>
       <mesh
         //@ts-ignore
-        geometry={(nodes.Bunny as Mesh).geometry}
+        geometry={(nodes.Chicken_Female as Mesh).geometry}
         material={material}
         position={[0, -0.5, 0]}
         scale={[1, 1.101, 0.738]}
@@ -39,4 +39,4 @@ export default function CloneBunny(props: GroupProps, opacity?: number) {
   )
 }
 
-useGLTF.preload('/models/clonebunny.glb')
+useGLTF.preload('/models/femalechicken.glb')

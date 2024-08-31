@@ -1,5 +1,6 @@
 export const fragment = `uniform vec3 uColor;
 uniform float uTime;
+uniform float uOpacity;
 
 varying vec3 vPosition;
 varying vec3 vNormal;
@@ -29,7 +30,7 @@ void main()
     holographic *= falloff;
 
     // Final color
-    gl_FragColor = vec4(uColor, holographic * 0.5);
+    gl_FragColor = vec4(uColor, holographic * 1.5);
     #include <tonemapping_fragment>
     #include <colorspace_fragment>
 }
