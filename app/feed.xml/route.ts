@@ -17,6 +17,14 @@ export async function GET() {
 
   const allPosts = [
     {
+      id: 'cfg-and-recursive-descent-parser',
+      title: 'CFG and Recursive Descent Parser Theory in Zig',
+      description:
+        'Learn about recursive descent parsing, context-free grammars, and their implementation in Zig. Explore the differences between regular and context-free languages, and build a mathematical parser using a top-down approach.',
+      tags: ['recursive descent parser', 'zig', 'cfg', 'regular language'],
+      date: '2024-09-02',
+    },
+    {
       id: 'lexer-in-zig',
       title: 'Writing a Lexer in Zig',
       description:

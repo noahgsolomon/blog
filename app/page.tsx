@@ -35,6 +35,24 @@ export default function Page() {
 
           <div className='w-full flex flex-col'>
             <Link
+              href={'/cfg-and-recursive-descent-parser'}
+              className='p-3 flex flex-col gap-2 rounded-lg relative hover:bg-[#1a1b2690] group'
+            >
+              <div className='flex flex-col gap-2 z-10'>
+                <div className='flex flex-wrap w-full gap-2 justify-between items-center'>
+                  <div className='flex flex-row items-center gap-2'>
+                    {/* <Suspense fallback={<div className='size-[80px]'></div>}> */}
+                    {/*   <LexerIcon /> */}
+                    {/* </Suspense> */}
+                    <p className='text-lg underline underline-offset-4 text-[#5692ae] group-hover:text-[#5692ae] group-visited:text-[#8466aa]'>
+                      recursive descent parser theory
+                    </p>
+                  </div>
+                  <p className='text-primary/60 text-sm'>sept 2, 2024</p>
+                </div>
+              </div>
+            </Link>
+            <Link
               href={'/lexer-in-zig'}
               className='p-3 flex flex-col gap-2 rounded-lg relative hover:bg-[#1a1b2690] group'
             >
@@ -44,7 +62,7 @@ export default function Page() {
                     {/* <Suspense fallback={<div className='size-[80px]'></div>}> */}
                     {/*   <LexerIcon /> */}
                     {/* </Suspense> */}
-                    <p className='text-lg underline underline-offset-4 text-[#5692ae] hover:text-[#5692ae] group-visited:text-[#8466aa]'>
+                    <p className='text-lg underline underline-offset-4 text-[#5692ae] group-hover:text-[#5692ae] group-visited:text-[#8466aa]'>
                       writing a lexer in zig
                     </p>
                   </div>
@@ -59,7 +77,7 @@ export default function Page() {
                     {/* <Suspense fallback={<div className='pr-[80px] size-[80px]'>sup</div>}> */}
                     {/*   <PPOIcon /> */}
                     {/* </Suspense> */}
-                    <p className='text-lg underline underline-offset-4 text-[#5692ae] hover:text-[#5692ae] group-visited:text-[#8466aa]'>
+                    <p className='text-lg underline underline-offset-4 text-[#5692ae] group-hover:text-[#5692ae] group-visited:text-[#8466aa]'>
                       motivating ppo algo
                     </p>
                   </div>

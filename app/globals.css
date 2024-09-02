@@ -39,7 +39,7 @@
     --input: 220 13% 91%;
     --ring: 224 71.4% 4.1%;
 
-    --radius: 0rem;
+    --radius: 0.3rem;
 
     /*generate button */
     --context-bg: hsl(0deg 0% 99%);
@@ -207,10 +207,6 @@ msup,
 mi,
 annotation {
   @apply text-[10px];
-}
-
-li {
-  @apply text-xs list-disc ml-4 text-primary;
 }
 
 /* generate button*/
@@ -390,6 +386,10 @@ li {
 p,
 a {
   @apply leading-[30px] text-base text-primary/80;
+}
+
+li {
+  @apply text-base list-disc ml-4 text-primary/80;
 }
 
 h1 {

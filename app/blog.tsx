@@ -8,8 +8,12 @@ import Link from 'next/link'
 import SyntaxHighlighter from 'react-syntax-highlighter'
 import { nightOwl } from 'react-syntax-highlighter/dist/esm/styles/hljs'
 import Footer from './footer'
+import hljs from 'highlight.js'
+import hljsZig from 'highlightjs-zig'
+// Register Zig language for highlight.js
+hljs.registerLanguage('zig', hljsZig)
 
-export default function Blog({ md, date }: { md: string; date: string }) {
+export default function Blog({ md, date, title }: { md: string; date: string; title: string }) {
   return (
     <>
       <div className='grow'>
@@ -21,7 +25,7 @@ export default function Blog({ md, date }: { md: string; date: string }) {
             home
           </Link>
           <p className='text-primary/60 pb-4'>{date}</p>
-          <h1 className='border-b text-3xl pb-8'>writing a lexer in zig</h1>
+          <h1 className='border-b text-3xl pb-8'>{title}</h1>
           <Markdown
             components={{
               code: ({ className, children, ...props }) => {

@@ -1,9 +1,5 @@
-import hljs from 'highlight.js'
-import hljsZig from 'highlightjs-zig'
 import { Metadata } from 'next'
 import Blog from '@/blog'
-// Register Zig language for highlight.js
-hljs.registerLanguage('zig', hljsZig)
 
 export const metadata: Metadata = {
   title: 'Writing a Lexer in Zig',
@@ -573,5 +569,5 @@ We can now build our program with \`zig build\` and will now be able to scan sou
 `
 
 export default function Page() {
-  return <Blog md={md} date='aug 25, 2024' />
+  return <Blog md={md} date='aug 25, 2024' title='writing a lexer in zig' />
 }
