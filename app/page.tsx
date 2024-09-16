@@ -35,6 +35,24 @@ export default function Page() {
 
           <div className='w-full flex flex-col'>
             <Link
+              href={'/motivating-adam-optimizer'}
+              className='p-3 flex flex-col gap-2 rounded-lg relative hover:bg-[#1a1b2690] group'
+            >
+              <div className='flex flex-col gap-2 z-10'>
+                <div className='flex flex-wrap w-full gap-2 justify-between items-center'>
+                  <div className='flex flex-row items-center gap-2'>
+                    {/* <Suspense fallback={<div className='size-[80px]'></div>}> */}
+                    {/*   <LexerIcon /> */}
+                    {/* </Suspense> */}
+                    <p className='text-lg underline underline-offset-4 text-[#5692ae] group-hover:text-[#5692ae] group-visited:text-[#8466aa]'>
+                      motivating adam optimizer
+                    </p>
+                  </div>
+                  <p className='text-primary/60 text-sm'>sept 16, 2024</p>
+                </div>
+              </div>
+            </Link>
+            <Link
               href={'/cfg-and-recursive-descent-parser'}
               className='p-3 flex flex-col gap-2 rounded-lg relative hover:bg-[#1a1b2690] group'
             >

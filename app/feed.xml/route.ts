@@ -17,6 +17,13 @@ export async function GET() {
 
   const allPosts = [
     {
+      id: 'motivating-adam-optimizer',
+      title: 'Motivating Adam Optimizer',
+      description: 'Learn about adam optimizer from the optimization algorithms that preceded it.',
+      tags: ['adam optimizer', 'ai', 'artificial intelligence', 'machine learning', 'neural networks'],
+      date: '2024-09-16',
+    },
+    {
       id: 'cfg-and-recursive-descent-parser',
       title: 'CFG and Recursive Descent Parser Theory in Zig',
       description:

@@ -196,7 +196,7 @@ p {
 }
 
 math {
-  @apply bg-secondary border rounded-sm p-1 max-w-full overflow-x-auto pointer-events-auto !important;
+  @apply rounded-lg p-1 flex justify-start font-bold pointer-events-auto !important;
 }
 
 mo,
