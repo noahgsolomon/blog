@@ -9,15 +9,21 @@ export default function sitemap(): MetadataRoute.Sitemap {
       priority: 1,
     },
     {
-      url: 'https://noahgsolomon.com/lexer-in-zig',
+      url: 'https://noahgsolomon.com/motivating-adam-optimizer',
       lastModified: new Date(),
       changeFrequency: 'weekly',
       priority: 0.8,
     },
     {
+      url: 'https://noahgsolomon.com/lexer-in-zig',
+      lastModified: new Date(),
+      changeFrequency: 'monthly',
+      priority: 0.8,
+    },
+    {
       url: 'https://noahgsolomon.com/cfg-and-recursive-descent-parser',
       lastModified: new Date(),
-      changeFrequency: 'weekly',
+      changeFrequency: 'monthly',
       priority: 0.7,
     },
   ]
