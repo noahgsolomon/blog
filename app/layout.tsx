@@ -8,7 +8,7 @@ const jetbrains = localFont({ src: '../public/JetBrainsMonoNerdFontMono-Regular.
 
 export const metadata: Metadata = {
   title: {
-    template: '%s | Noah Solomon Blog',
+    template: '%s',
     default: 'Noah Solomon Blog',
   },
   description: 'I talk about cool concepts and algorithms in ML',
