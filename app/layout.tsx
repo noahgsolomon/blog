@@ -7,10 +7,7 @@ import Providers from './providers'
 const jetbrains = localFont({ src: '../public/JetBrainsMonoNerdFontMono-Regular.ttf' })
 
 export const metadata: Metadata = {
-  title: {
-    template: '%s',
-    default: 'Noah Solomon Blog',
-  },
+  title: 'Noah Solomon Blog',
   description: 'I talk about cool concepts and algorithms in ML',
   keywords: ['machine learning', 'algorithms', 'cs', 'zig', 'python', 'programming'],
   publisher: 'Noah Solomon',
