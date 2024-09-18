@@ -4,10 +4,7 @@ import { Toaster } from '@/components/ui/sonner'
 import { Metadata } from 'next'
 
 export const metadata: Metadata = {
-  title: {
-    template: '%s | Noah Solomon Blog',
-    default: 'Motivation Behind PPO Algorithm. Noah Solomon Blog',
-  },
+  title: 'Motivation Behind PPO Algorithm.',
   description: 'What came before Proximal Policy Optimization, and why did PPO come to be in the first place?',
   keywords: ['machine learning', 'algorithms', 'cs', 'zig', 'python', 'programming'],
   publisher: 'Noah Solomon',
