@@ -3,8 +3,6 @@ import Footer from './footer'
 import Falling3D from './falling-3d'
 import { Suspense } from 'react'
 import { Layout } from '@/components/dom/Layout'
-import LexerIcon from './Models/icons/lexer-icon'
-import PPOIcon from './Models/icons/ppo-icon'
 
 export default function Page() {
   return (
@@ -18,19 +16,29 @@ export default function Page() {
       <div className='fade-in'></div>
 
       {/* Overlay Text Content */}
-      <div className='max-h-[90vh] absolute inset-0 flex flex-col justify-center items-center z-10'>
+      <div className='max-h-[90vh] mt-12 sm:absolute inset-0 flex flex-col justify-center items-center z-10'>
         <div className='flex flex-col gap-12 sm:gap-24 text-center px-4 mx-auto max-w-[600px] w-full items-center'>
           <div className='flex flex-col gap-2'>
             <p className='text-xl'>NOAHGSOLOMON v.0.4.1</p>
             <p className='text-lg'>cs undergrad who just wants to cook.</p>
 
-            <Link
-              target='_blank'
-              href={'/feed.xml'}
-              className='text-base underline underline-offset-4 text-[#5692ae] hover:text-[#5692ae] visited:text-[#8466aa]'
-            >
-              rss feed
-            </Link>
+            <div className='justify-center flex flex-row gap-8'>
+              <Link
+                target='_blank'
+                href={'https://assets.noahgsolomon.com/Resume.pdf'}
+                className='text-base underline underline-offset-4 text-[#5692ae] hover:text-[#5692ae] visited:text-[#8466aa]'
+              >
+                resume
+              </Link>
+
+              <Link
+                target='_blank'
+                href={'/feed.xml'}
+                className='text-base underline underline-offset-4 text-[#5692ae] hover:text-[#5692ae] visited:text-[#8466aa]'
+              >
+                rss feed
+              </Link>
+            </div>
           </div>
 
           <div className='w-full flex flex-col'>
@@ -63,7 +71,7 @@ export default function Page() {
                     {/*   <LexerIcon /> */}
                     {/* </Suspense> */}
                     <p className='text-lg underline underline-offset-4 text-[#5692ae] group-hover:text-[#5692ae] group-visited:text-[#8466aa]'>
-                      recursive descent parser theory
+                      parser theory
                     </p>
                   </div>
                   <p className='text-primary/60 text-sm'>sept 2, 2024</p>
@@ -81,7 +89,7 @@ export default function Page() {
                     {/*   <LexerIcon /> */}
                     {/* </Suspense> */}
                     <p className='text-lg underline underline-offset-4 text-[#5692ae] group-hover:text-[#5692ae] group-visited:text-[#8466aa]'>
-                      writing a lexer in zig
+                      writing a lexer
                     </p>
                   </div>
                   <p className='text-primary/60 text-sm'>aug 25, 2024</p>
