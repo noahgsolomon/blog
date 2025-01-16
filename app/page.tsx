@@ -19,8 +19,8 @@ export default function Page() {
       <div className='max-h-[90vh] mt-12 sm:absolute inset-0 flex flex-col justify-center items-center z-10'>
         <div className='flex flex-col gap-12 sm:gap-24 text-center px-4 mx-auto max-w-[600px] w-full items-center'>
           <div className='flex flex-col gap-2'>
-            <p className='text-xl'>NOAHGSOLOMON v.0.4.1</p>
-            <p className='text-lg'>cs undergrad who just wants to cook.</p>
+            <p className='text-xl'>NOAHGSOLOMON v.0.5.0</p>
+            <p className='text-lg'>let me cook.</p>
 
             <div className='justify-center flex flex-row gap-8'>
               <Link
@@ -42,6 +42,24 @@ export default function Page() {
           </div>
 
           <div className='w-full flex flex-col'>
+            <Link
+              href={'/math-of-empathy'}
+              className='p-3 flex flex-col gap-2 rounded-lg relative hover:bg-[#1a1b2690] group'
+            >
+              <div className='flex flex-col gap-2 z-10'>
+                <div className='flex flex-wrap w-full gap-2 justify-between items-center'>
+                  <div className='flex flex-row items-center gap-2'>
+                    {/* <Suspense fallback={<div className='size-[80px]'></div>}> */}
+                    {/*   <LexerIcon /> */}
+                    {/* </Suspense> */}
+                    <p className='text-lg underline underline-offset-4 text-[#5692ae] group-hover:text-[#5692ae] group-visited:text-[#8466aa]'>
+                      the math of empathy
+                    </p>
+                  </div>
+                  <p className='text-primary/60 text-sm'>jan 16, 2025</p>
+                </div>
+              </div>
+            </Link>
             <Link
               href={'/motivating-adam-optimizer'}
               className='p-3 flex flex-col gap-2 rounded-lg relative hover:bg-[#1a1b2690] group'

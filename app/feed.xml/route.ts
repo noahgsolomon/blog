@@ -17,6 +17,14 @@ export async function GET() {
 
   const allPosts = [
     {
+      id: 'math-of-empathy',
+      title: 'The Math of Empathy',
+      description:
+        'How we understand and interact with others through the lens of mathematical dimensionality and projections.',
+      tags: ['empathy', 'math', 'dimensionality', 'projections'],
+      date: '2025-01-16',
+    },
+    {
       id: 'motivating-adam-optimizer',
       title: 'Motivating Adam Optimizer',
       description: 'Learn about adam optimizer from the optimization algorithms that preceded it.',
